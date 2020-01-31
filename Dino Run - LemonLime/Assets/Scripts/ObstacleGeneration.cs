@@ -9,11 +9,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CactusGeneration : MonoBehaviour
+public class ObstacleGeneration : MonoBehaviour
 {
     //when to generate
-    public float timeUntilGeneration = 5.0f;
-    private float timeRemaining = 5.0f;
+    private float timeRemaining = 0.0f;
 
     //where to generate
     public float minDist = 2.0f;
@@ -33,7 +32,7 @@ public class CactusGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeRemaining = timeUntilGeneration;
+        timeRemaining = Random.Range(1.0f, 3.0f);
     }
 
     // Update is called once per frame
@@ -68,7 +67,7 @@ public class CactusGeneration : MonoBehaviour
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
             //reset time
-            timeRemaining = timeUntilGeneration;
+            timeRemaining = Random.Range(1.0f, 3.0f);
         }
     }
 }
