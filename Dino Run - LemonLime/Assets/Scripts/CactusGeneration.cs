@@ -11,19 +11,20 @@ using UnityEngine;
 
 public class CactusGeneration : MonoBehaviour
 {
-    //when + where to generate (time or dist)
+    //when to generate
     public float timeUntilGeneration = 5.0f;
     private float timeRemaining = 5.0f;
+
+    //where to generate
     public float minDist = 2.0f;
     public float maxDist = 5.0f;
     private float randDist = 2.0f;
-
     public Vector2 PosToGenerate = Vector2.zero;
 
     //cacti
     public Vector2 BaseCactusPos = new Vector2(9.5f, -1.25f);
     public int randObject = 0;
-    public GameObject[] CactusList = new GameObject[5];
+    public GameObject[] CactusList = new GameObject[6];
 
     //birds
     public int ScoreUntilBirds = 100;
@@ -44,7 +45,7 @@ public class CactusGeneration : MonoBehaviour
         if(timeRemaining <= 0)
         {
             //generate cacti
-            if (Score.getScore() <= ScoreUntilBirds)
+            if (/*Score.getScore() <= */ ScoreUntilBirds >= 0)
             {
                 //find a random position to generate
                 randDist = Random.Range(minDist, maxDist);
