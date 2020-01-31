@@ -22,9 +22,6 @@ public class CactusGeneration : MonoBehaviour
 
     //cacti
     public Vector2 BaseCactusPos = new Vector2(9.5f, -1.25f);
-    public int minNum = 1;
-    public int maxNum = 4;
-    public int randNum = 1;
     public int randObject = 0;
     public GameObject[] CactusList = new GameObject[5];
 
@@ -49,29 +46,27 @@ public class CactusGeneration : MonoBehaviour
             //generate cacti
             if (Score.getScore() <= ScoreUntilBirds)
             {
-                //find a random position & number of obstacles to generate
+                //find a random position to generate
                 randDist = Random.Range(minDist, maxDist);
-                randNum = Random.Range(minNum, maxNum + 1);
-                //set generation position
                 PosToGenerate = BaseCactusPos;
                 PosToGenerate.x += randDist;
 
-                //instantiate obstacles
-                for (int i = 0; i < randNum; i++)
-                {
-                    //pick a random object from the list of obstacles
-                    randObject = Random.Range(0, CactusList.Length);
-                    Instantiate(CactusList[randObject], PosToGenerate, transform.rotation);
-                    //increment the position to instantiate by the prev object's width
-                    PosToGenerate.x += CactusList[randObject].transform.localScale.x;
-                }
+                //instantiate
+                randObject = Random.Range(0, CactusList.Length);
+                Instantiate(CactusList[randObject], PosToGenerate, transform.rotation);
             }
-            //generate birds
+            //generate birds once we reach a certain score
             else if (Random.Range(0.0f, 1.0f) <= 0.33f)
             {
+                //pick one of three positions (low, middle, high)
+                randDist = Random.Range(minDist, maxDist);
                 PosToGenerate = BirdPos[Random.Range(0, 3)];
+                PosToGenerate.x += randDist;
+
+                //instantiate
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
+            //reset time
             timeRemaining = timeUntilGeneration;
         }
     }
