@@ -22,13 +22,12 @@ public class CactusGeneration : MonoBehaviour
     public Vector2 PosToGenerate = Vector2.zero;
 
     //cacti
-    public Vector2 BaseCactusPos = new Vector2(9.5f, -1.25f);
     public int randObject = 0;
     public GameObject[] CactusList = new GameObject[6];
 
     //birds
     public int ScoreUntilBirds = 100;
-    public Vector2[] BirdPos = { new Vector2(9.5f, -1.25f), new Vector2(9.5f, 0.0f), new Vector2(9.5f, 1.25f) };
+    public float[] BirdYPos = { -1.25f, 0.0f, 1.25f };
     public GameObject Bird;
 
     // Start is called before the first frame update
@@ -44,12 +43,13 @@ public class CactusGeneration : MonoBehaviour
         timeRemaining -= Time.deltaTime;
         if(timeRemaining <= 0)
         {
+
             //generate cacti
             if (/*Score.getScore() <= */ ScoreUntilBirds >= 0)
             {
                 //find a random position to generate
                 randDist = Random.Range(minDist, maxDist);
-                PosToGenerate = BaseCactusPos;
+                PosToGenerate = new Vector2(transform.position.x + 10.0f, -1.25f);
                 PosToGenerate.x += randDist;
 
                 //instantiate
@@ -61,7 +61,7 @@ public class CactusGeneration : MonoBehaviour
             {
                 //pick one of three positions (low, middle, high)
                 randDist = Random.Range(minDist, maxDist);
-                PosToGenerate = BirdPos[Random.Range(0, 3)];
+                PosToGenerate = new Vector2(transform.position.x + 10.0f, BirdYPos[Random.Range(0, 3)]);
                 PosToGenerate.x += randDist;
 
                 //instantiate

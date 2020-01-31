@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CameraScroll : MonoBehaviour
 {
-    public float speedMultiplier = 1.1f;
-    public float baseSpeed = 2.0f;
-    public float currSpeed = 2.0f;
+    public float speedMultiplier = 1.001f;
+    public float baseSpeed = 0.01f;
+    public float currSpeed = 0.01f;
+    public float maxSpeed = 0.15f;
 
-    public Vector2 newPos;
+    public Vector3 newPos;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,14 @@ public class CameraScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //update position
         newPos = transform.position;
-        newPos.x += currSpeed * Time.deltaTime;
+        newPos.x += currSpeed;
+        newPos.z = -10;
         transform.position = newPos;
-        currSpeed *= speedMultiplier * Time.deltaTime;
+        if(currSpeed <= maxSpeed)
+        {
+            currSpeed *= speedMultiplier;
+        }
     }
 }
