@@ -13,7 +13,7 @@ public class CameraScroll : MonoBehaviour
 {
     public float speedMultiplier = 1.001f;
     public float baseSpeed = 0.01f;
-    public float currSpeed = 0.01f;
+    public float currSpeed = 0.00f;
     public float maxSpeed = 0.15f;
 
     public Vector3 newPos;
@@ -21,7 +21,6 @@ public class CameraScroll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currSpeed = baseSpeed;
         newPos = transform.position;
     }
 

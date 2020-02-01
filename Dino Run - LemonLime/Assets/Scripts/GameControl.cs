@@ -28,8 +28,8 @@ public class GameControl : MonoBehaviour
     public GameObject Camera;
     public GameObject Player;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before start
+    void Awake()
     {
         Camera = GameObject.Find("Main Camera");
         CurrScoreText = Camera.transform.Find("ScoreText").gameObject;
@@ -38,8 +38,18 @@ public class GameControl : MonoBehaviour
 
         //set up UI
         CurrScoreText.GetComponent<TextMesh>().text = "HI 00000";
-        HighScoreText.GetComponent<TextMesh>().text = "HI 00000";
+        HighScoreText.GetComponent<TextMesh>().text = "00000";
         GameOverText.GetComponent<TextMesh>().text = "G A M E  O V E R";
+
+        //game paued until first jump
+        GameOverText.SetActive(false);
+        Camera.GetComponent<CameraScroll>().currSpeed = 0;
+
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
 
     }
 
@@ -47,9 +57,10 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         //player jumps to start game
-        if (Input.GetAxis("Jump") > 0 && !gameOver)
+        if (Input.GetAxis("Jump") > 0 && !inGame && !gameOver)
         {
             inGame = true;
+            Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
 
         }
         //increment score while game is playing
@@ -57,7 +68,7 @@ public class GameControl : MonoBehaviour
         {
             //update score + print
             scoreTimer += Time.deltaTime;
-            if (scoreTimer > 1.0f)
+            if (scoreTimer > 0.1f)
             {
                 score++;
                 scoreTimer = 0.0f;
@@ -65,10 +76,20 @@ public class GameControl : MonoBehaviour
             }
             //TODO: flicker on 100s
         }
+
+        //for debugging
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            GameOver();
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
     }
 
     //call this when the game ends to check high score and print game over message
-    public void endGame()
+    public void GameOver()
     {
         inGame = false;
         gameOver = true;
@@ -88,6 +109,7 @@ public class GameControl : MonoBehaviour
 
     public void Restart()
     {
+        inGame = true;
         gameOver = false;
 
         //reset UI

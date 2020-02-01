@@ -11,8 +11,11 @@ using UnityEngine;
 
 public class ObstacleGeneration : MonoBehaviour
 {
-    //generation is a function of score
+    //generation is a function of time (or score?)
     public GameObject GameControl;
+    public float minTime = 3.0f;
+    public float maxTime = 5.0f;
+    private float timeRemaining = 0.0f;
 
     //where to generate
     public float minDist = 2.0f;
@@ -25,7 +28,7 @@ public class ObstacleGeneration : MonoBehaviour
     public GameObject[] CactusList = new GameObject[6];
 
     //birds
-    public int ScoreUntilBirds = 100;
+    public int ScoreUntilBirds = 500;
     public float[] BirdYPos = { -1.25f, 0.0f, 1.25f };
     public GameObject Bird;
 
@@ -33,13 +36,17 @@ public class ObstacleGeneration : MonoBehaviour
     void Start()
     {
         GameControl = GameObject.Find("GameControl");
+        timeRemaining = Random.Range(minTime, maxTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //create a new obstacle every time the score reaches a multiple of 10 (make sure game is running)
-        if (GameControl.GetComponent<GameControl>().score % 50 == 0 && GameControl.GetComponent<GameControl>().inGame)
+        //decrement time
+        timeRemaining -= Time.deltaTime;
+
+        //instantiate when time runs out (consider function of score)
+        if (timeRemaining <= 0)
         {
             //generate cacti
             if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
@@ -49,10 +56,11 @@ public class ObstacleGeneration : MonoBehaviour
                 PosToGenerate = new Vector2(transform.position.x + 10.0f, -1.25f);
                 PosToGenerate.x += randDist;
 
-                //instantiate
+                //instantiate random cactus variation
                 randObject = Random.Range(0, CactusList.Length);
                 Instantiate(CactusList[randObject], PosToGenerate, transform.rotation);
             }
+
             //generate birds once we reach a certain score
             else if (Random.Range(0.0f, 1.0f) <= 0.33f)
             {
@@ -64,6 +72,9 @@ public class ObstacleGeneration : MonoBehaviour
                 //instantiate
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
+
+            //restart timer
+            timeRemaining = Random.Range(minTime, maxTime);
         }
     }
 }

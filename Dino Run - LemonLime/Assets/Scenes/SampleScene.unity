@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameControl: {fileID: 0}
+  minTime: 3
+  maxTime: 5
   minDist: 2
   maxDist: 5
   PosToGenerate: {x: 0, y: 0}
@@ -251,7 +253,7 @@ MonoBehaviour:
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  ScoreUntilBirds: 100
+  ScoreUntilBirds: 500
   BirdYPos:
   - -1.25
   - 0
@@ -346,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!102 &975802420
 TextMesh:
   serializedVersion: 3
