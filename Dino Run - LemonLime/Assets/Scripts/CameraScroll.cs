@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+CameraScroll.cs
+by Deepti Ramani
+01/30/2020
+This class scrolls the camera at a continuously increasing speed
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

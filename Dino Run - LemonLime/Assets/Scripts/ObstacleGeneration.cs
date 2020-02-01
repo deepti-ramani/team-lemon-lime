@@ -1,8 +1,8 @@
 ﻿/*
-CactusGeneration.cs
+ObstacleGeneration.cs
 by Deepti Ramani
 01/30/2020
-This is class generates obstacles for the player to jump over or duck under
+This class generates obstacles for the player to jump over or duck under
 */
 
 using System.Collections;
@@ -44,7 +44,7 @@ public class ObstacleGeneration : MonoBehaviour
         {
 
             //generate cacti
-            if (/*Score.getScore() <= */ ScoreUntilBirds >= 0)
+            if (ScoreUntilBirds > 0)
             {
                 //find a random position to generate
                 randDist = Random.Range(minDist, maxDist);
@@ -67,6 +67,7 @@ public class ObstacleGeneration : MonoBehaviour
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
             //reset time
+            //TODO: shorten time as speed increases
             timeRemaining = Random.Range(1.0f, 3.0f);
         }
     }
