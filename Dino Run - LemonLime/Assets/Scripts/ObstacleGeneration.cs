@@ -11,8 +11,8 @@ using UnityEngine;
 
 public class ObstacleGeneration : MonoBehaviour
 {
-    //when to generate
-    private float timeRemaining = 0.0f;
+    //generation is a function of score
+    public GameObject GameControl;
 
     //where to generate
     public float minDist = 2.0f;
@@ -32,19 +32,17 @@ public class ObstacleGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeRemaining = Random.Range(1.0f, 3.0f);
+        GameControl = GameObject.Find("GameControl");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //decrement timer for generation
-        timeRemaining -= Time.deltaTime;
-        if(timeRemaining <= 0)
+        //create a new obstacle every time the score reaches a multiple of 10 (make sure game is running)
+        if (GameControl.GetComponent<GameControl>().score % 50 == 0 && GameControl.GetComponent<GameControl>().inGame)
         {
-
             //generate cacti
-            if (ScoreUntilBirds > 0)
+            if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
             {
                 //find a random position to generate
                 randDist = Random.Range(minDist, maxDist);
@@ -66,9 +64,6 @@ public class ObstacleGeneration : MonoBehaviour
                 //instantiate
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
-            //reset time
-            //TODO: shorten time as speed increases
-            timeRemaining = Random.Range(1.0f, 3.0f);
         }
     }
 }
