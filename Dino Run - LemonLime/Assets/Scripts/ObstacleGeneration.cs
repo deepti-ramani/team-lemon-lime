@@ -11,16 +11,13 @@ using UnityEngine;
 
 public class ObstacleGeneration : MonoBehaviour
 {
-    //generation is a function of time (or score?)
+    //generation is a function of distance
     public GameObject GameControl;
-    public float minTime = 3.0f;
-    public float maxTime = 5.0f;
-    private float timeRemaining = 0.0f;
+    public float minOffset = 2.0f;
+    public float maxOffset = 5.0f;
+    private float targetPosX;
 
     //where to generate
-    public float minDist = 2.0f;
-    public float maxDist = 5.0f;
-    private float randDist = 2.0f;
     public Vector2 PosToGenerate = Vector2.zero;
 
     //cacti
@@ -36,25 +33,20 @@ public class ObstacleGeneration : MonoBehaviour
     void Start()
     {
         GameControl = GameObject.Find("GameControl");
-        timeRemaining = Random.Range(minTime, maxTime);
+        targetPosX = transform.position.x + Random.Range(minOffset, maxOffset);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //decrement time
-        timeRemaining -= Time.deltaTime;
-
-        //instantiate when time runs out (consider function of score)
-        if (timeRemaining <= 0)
+        //instantiate when we've travelled the required dist
+        if (transform.position.x - targetPosX <= 0.001)
         {
             //generate cacti
             if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
             {
                 //find a random position to generate
-                randDist = Random.Range(minDist, maxDist);
                 PosToGenerate = new Vector2(transform.position.x + 10.0f, -1.25f);
-                PosToGenerate.x += randDist;
 
                 //instantiate random cactus variation
                 randObject = Random.Range(0, CactusList.Length);
@@ -65,16 +57,14 @@ public class ObstacleGeneration : MonoBehaviour
             else if (Random.Range(0.0f, 1.0f) <= 0.33f)
             {
                 //pick one of three positions (low, middle, high)
-                randDist = Random.Range(minDist, maxDist);
                 PosToGenerate = new Vector2(transform.position.x + 10.0f, BirdYPos[Random.Range(0, 3)]);
-                PosToGenerate.x += randDist;
 
                 //instantiate
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
 
             //restart timer
-            timeRemaining = Random.Range(minTime, maxTime);
+            targetPosX = transform.position.x + Random.Range(minOffset, maxOffset);
         }
     }
 }
