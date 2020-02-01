@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         isJump = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space);
         isQuickFall = Input.GetKey(KeyCode.DownArrow);
         //Is player on the ground?
-        isGrounded = gameObject.transform.position.y == groundPosition + buffer;
+        isGrounded = (gameObject.transform.position.y == groundPosition + buffer) || (gameObject.transform.position.y == groundPosition + buffer + 0.1);
 
         //Debug
         GameObject.Find("New Text").GetComponent<TextMesh>().text = "IsJump: " + isJump + "\n isQuickFall: " + isQuickFall + "\n isGrounded: " + isGrounded;
