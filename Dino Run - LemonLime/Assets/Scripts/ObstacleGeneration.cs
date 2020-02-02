@@ -13,9 +13,9 @@ public class ObstacleGeneration : MonoBehaviour
 {
     //generation is a function of distance
     public GameObject GameControl;
-    public float minOffset = 2.0f;
-    public float maxOffset = 5.0f;
-    private float targetPosX;
+    public float minOffset = 7.0f;
+    public float maxOffset = 15.0f;
+    private float targetPos;
 
     //where to generate
     public Vector2 PosToGenerate = Vector2.zero;
@@ -33,14 +33,14 @@ public class ObstacleGeneration : MonoBehaviour
     void Start()
     {
         GameControl = GameObject.Find("GameControl");
-        targetPosX = transform.position.x + Random.Range(minOffset, maxOffset);
+        targetPos = transform.position.x + Random.Range(minOffset, maxOffset);
     }
 
     // Update is called once per frame
     void Update()
     {
         //instantiate when we've travelled the required dist
-        if (transform.position.x - targetPosX <= 0.001)
+        if (targetPos - transform.position.x <= 0.001)
         {
             //generate cacti
             if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
@@ -63,8 +63,8 @@ public class ObstacleGeneration : MonoBehaviour
                 Instantiate(Bird, PosToGenerate, transform.rotation);
             }
 
-            //restart timer
-            targetPosX = transform.position.x + Random.Range(minOffset, maxOffset);
+            //calculate new distance
+            targetPos = transform.position.x + Random.Range(minOffset, maxOffset);
         }
     }
 }

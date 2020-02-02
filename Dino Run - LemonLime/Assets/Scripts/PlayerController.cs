@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //Variables
-    public float baseSpeed = 0f;
+    //game control for end game
+    public GameObject GameControl;
 
-    //multiplier of speed based on score
-    float speedMultiplier = 0f;
+    //Variables for horizontal movement
+    public float speedMultiplier = 1.001f;
+    public float baseHorizontalSpeed = 0.01f;
+    public float currHorizontalSpeed = 0.00f;
+    public float maxHorizontalSpeed = 0.15f;
+    public Vector3 newXPos;
+
+    //Variables for vertical movement
+    public float baseSpeed = 0f;
 
     bool isJump;
     bool isQuickFall;
@@ -26,19 +33,38 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameControl = GameObject.Find("GameControl");
+
         OriginalPosition = gameObject.transform.position;
         //set groundPosition to top of ground platform Y.
         groundPosition = GameObject.Find(groundToFind).transform.position.y;
+
+        //set base horizontal speed + pos
+        currHorizontalSpeed = baseHorizontalSpeed;
+        newXPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //move horizontally at an increasing speed (should match camera)
+        newXPos = transform.position;
+        newXPos.x += currHorizontalSpeed;
+        transform.position = newXPos;
+        if (currHorizontalSpeed <= maxHorizontalSpeed)
+        {
+            currHorizontalSpeed *= speedMultiplier;
+        }
 
     }
-    private void OnCollisionEnter2D(Collider2D collider) {
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        //if it hits an obstacle, quit
+        if(collider.gameObject.tag == "Obstacle")
+        {
+            GameControl.GetComponent<GameControl>().GameOver();
+        }
     }
 
     private void FixedUpdate()

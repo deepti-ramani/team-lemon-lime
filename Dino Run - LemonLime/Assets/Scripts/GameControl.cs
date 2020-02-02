@@ -18,7 +18,7 @@ public class GameControl : MonoBehaviour
     public int score = 0;
     public int highScore = 0;
     public float scoreTimer = 0.0f;
-    public GameObject CurrScoreText;
+    public GameObject ScoreText;
     public GameObject HighScoreText;
 
     //game over
@@ -26,23 +26,28 @@ public class GameControl : MonoBehaviour
     public GameObject RestartButton;
 
     public GameObject Camera;
+    public Vector3 initCameraPos = new Vector3(0, 0, -10);
     public GameObject Player;
+    public Vector3 initPlayerPos = new Vector3(-7.5f, -1.25f, 0);
 
     // Awake is called before start
     void Awake()
     {
         Camera = GameObject.Find("Main Camera");
-        CurrScoreText = Camera.transform.Find("ScoreText").gameObject;
+        ScoreText = Camera.transform.Find("ScoreText").gameObject;
         HighScoreText = Camera.transform.Find("HighScoreText").gameObject;
         GameOverText = Camera.transform.Find("GameOverText").gameObject;
+        Player = GameObject.Find("Player");
 
         //set up UI
-        CurrScoreText.GetComponent<TextMesh>().text = "HI 00000";
-        HighScoreText.GetComponent<TextMesh>().text = "00000";
+        ScoreText.GetComponent<TextMesh>().text = "00000";
+        HighScoreText.GetComponent<TextMesh>().text = "HI 00000";
         GameOverText.GetComponent<TextMesh>().text = "G A M E  O V E R";
-
-        //game paued until first jump
+        //hide end game ui
         GameOverText.SetActive(false);
+        RestartButton.SetActive(false);
+
+        //game paused until first jump
         Camera.GetComponent<CameraScroll>().currSpeed = 0;
 
     }
@@ -56,11 +61,12 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //player jumps to start game
+        //player jumps to start game if not already in game & if game isn't ended
         if (Input.GetAxis("Jump") > 0 && !inGame && !gameOver)
         {
             inGame = true;
             Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
+            Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
 
         }
         //increment score while game is playing
@@ -72,12 +78,12 @@ public class GameControl : MonoBehaviour
             {
                 score++;
                 scoreTimer = 0.0f;
-                CurrScoreText.GetComponent<TextMesh>().text = "" + score;
+                ScoreText.GetComponent<TextMesh>().text = "" + score;
             }
             //TODO: flicker on 100s
         }
 
-        //for debugging
+        //for debugging (auto quit/restart)
         if(Input.GetKeyDown(KeyCode.Q))
         {
             GameOver();
@@ -96,6 +102,7 @@ public class GameControl : MonoBehaviour
 
         //stop moving and display end game ui
         Camera.GetComponent<CameraScroll>().currSpeed = 0.0f;
+        Player.GetComponent<PlayerController>().currHorizontalSpeed = 0.0f;
         GameOverText.SetActive(true);
         RestartButton.SetActive(true);
 
@@ -107,6 +114,7 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    //reset values for starting over
     public void Restart()
     {
         inGame = true;
@@ -114,12 +122,17 @@ public class GameControl : MonoBehaviour
 
         //reset UI
         score = 0;
-        CurrScoreText.GetComponent<TextMesh>().text = "00000";
+        ScoreText.GetComponent<TextMesh>().text = "00000";
         GameOverText.SetActive(false);
         RestartButton.SetActive(false);
 
+        //regenerate ground
+        Camera.GetComponent<GroundGeneration>().InstantiateInitGround();
+
         //reset camera movement
         Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
-        Camera.transform.position = new Vector3(0.0f, 0.0f, -10.0f);
+        Camera.transform.position = initCameraPos;
+        Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
+        Player.transform.position = initPlayerPos;
     }
 }
