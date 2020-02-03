@@ -75,13 +75,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if colided with ground, isGrounded is true
+        if (collision.gameObject.name == groundToFind) {
+            isGrounded = true;
+        }
+    }
     private void FixedUpdate()
     {
         //Key Events: Up / Space and down arrow
         isJump = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space);
         isQuickFall = Input.GetKey(KeyCode.DownArrow);
         //Is player on the ground?
-        isGrounded = (gameObject.transform.position.y == groundPosition + buffer) || (gameObject.transform.position.y == groundPosition + buffer + 0.1);
+        //Check if player is collided with ground via groundToFind
+        
 
         //Debug
         Debug.Log("isJump: " + isJump + " | isQuickfall: " + isQuickFall + " | isGrounded: " + isGrounded);
