@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+PlayerController.cs
+by Kaijie Zhou
+01/30/2020
+This class controls the player's input + movement options
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,21 +22,22 @@ public class PlayerController : MonoBehaviour
     public Vector3 newXPos;
 
     //Variables for vertical movement
-    public float baseSpeed = 0f;
+    public float baseSpeed = 2.5f;
 
-    bool isJump;
-    bool isQuickFall;
-    bool isGrounded;
+    bool isJump = false;
+    bool isQuickFall = false;
+    bool isGrounded = true;
 
     public float groundPosition;
     public float buffer;
-    public string groundToFind = "";
+    public string groundToFind = "Ground";
     //Jump cooldown timer
     float JumpCooldown = 0.001f;
     //Timer for time key held to make jump height different
     float JumpHeightTimer = 0f;
     //original positionto check if climax of jump
     Vector3 OriginalPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         OriginalPosition = gameObject.transform.position;
         //set groundPosition to top of ground platform Y.
-        groundPosition = GameObject.Find(groundToFind).transform.position.y;
+        groundPosition = GameObject.FindWithTag(groundToFind).transform.position.y;
 
         //set base horizontal speed + pos
         currHorizontalSpeed = baseHorizontalSpeed;
@@ -76,7 +84,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = (gameObject.transform.position.y == groundPosition + buffer) || (gameObject.transform.position.y == groundPosition + buffer + 0.1);
 
         //Debug
-        GameObject.Find("New Text").GetComponent<TextMesh>().text = "IsJump: " + isJump + "\n isQuickFall: " + isQuickFall + "\n isGrounded: " + isGrounded;
+        Debug.Log("isJump: " + isJump + " | isQuickfall: " + isQuickFall + " | isGrounded: " + isGrounded);
 
         //set buffer to distance between player position and groundToFind.
         buffer = gameObject.transform.position.y - GameObject.Find(groundToFind).transform.position.y;

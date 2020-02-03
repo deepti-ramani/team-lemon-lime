@@ -1,8 +1,8 @@
 ﻿/*
-Score.cs
+GameControl.cs
 by Deepti Ramani
 01/31/2020
-This class keeps track of score and game state (intro, win, lose, etc)
+This class keeps track of score and game's current state (intro, win, lose, etc)
 */
 
 using System.Collections;

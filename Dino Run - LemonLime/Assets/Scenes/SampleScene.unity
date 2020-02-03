@@ -340,7 +340,8 @@ MonoBehaviour:
   - {fileID: 835408967020720073, guid: a0d4eb4f3b7dad14abb52455a0a520c8, type: 3}
   - {fileID: 835408967020720073, guid: a0d4eb4f3b7dad14abb52455a0a520c8, type: 3}
   SegmentWidth: 10
-  PosToGenerate: {x: -4, y: -2}
+  initPosToGenerate: {x: -4, y: -2}
+  currPosToGenerate: {x: 0, y: 0}
 --- !u!1 &570682225
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,34 +912,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &1677565781 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1323909369635587232, guid: 469a66af1a132cc4a9d111c74df8b614,
-    type: 3}
-  m_PrefabInstance: {fileID: 1397032075}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1677565786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1677565781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e5d9640641d65a49a8a256cba76b33d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameControl: {fileID: 0}
-  speedMultiplier: 1.001
-  baseHorizontalSpeed: 0.01
-  currHorizontalSpeed: 0
-  maxHorizontalSpeed: 0.15
-  newXPos: {x: 0, y: 0, z: 0}
-  baseSpeed: 0
-  groundPosition: 0
-  buffer: 0
-  groundToFind: 
 --- !u!1 &2020481013
 GameObject:
   m_ObjectHideFlags: 0
