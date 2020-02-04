@@ -14,7 +14,7 @@ public class CameraScroll : MonoBehaviour
     public float speedMultiplier = 1.001f;
     public float baseSpeed = 0.02f;
     public float currSpeed = 0.00f;
-    public float maxSpeed = 0.125f;
+    public float maxSpeed = 0.1f;
 
     public Vector3 newPos;
 

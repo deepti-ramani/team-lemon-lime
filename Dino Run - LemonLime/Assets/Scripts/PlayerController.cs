@@ -20,12 +20,12 @@ public class PlayerController : MonoBehaviour
     public float speedMultiplier = 1.001f;
     public float baseHorizontalSpeed = 0.02f;
     public float currHorizontalSpeed = 0.00f;
-    public float maxHorizontalSpeed = 0.125f;
+    public float maxHorizontalSpeed = 0.1f;
     public Vector3 newXPos;
 
     //Variables for vertical movement
     public float jumpSpeed = 0.0f;
-    public float baseJumpSpeed = 10.0f;
+    public float baseJumpSpeed = 7.5f;
     public float jumpMultiplier = 3.0f;
 
     //Timer for time key held to make jump height different

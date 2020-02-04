@@ -231,7 +231,7 @@ MonoBehaviour:
   speedMultiplier: 1.001
   baseSpeed: 0.02
   currSpeed: 0
-  maxSpeed: 0.125
+  maxSpeed: 0.1
   newPos: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -817,6 +817,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323909369635587234, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323909369635587234, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323909369635587234, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 469a66af1a132cc4a9d111c74df8b614, type: 3}

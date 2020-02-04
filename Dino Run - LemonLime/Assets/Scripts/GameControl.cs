@@ -29,18 +29,23 @@ public class GameControl : MonoBehaviour
 
     //game objects
     public GameObject Camera;
-    public Vector3 initCameraPos = new Vector3(0, 0, -10);
+    public Vector3 initCameraPos;
     public GameObject Player;
-    public Vector3 initPlayerPos = new Vector3(-7.5f, -1.25f, 0);
+    public Vector3 initPlayerPos;
 
     // Awake is called before start
     void Awake()
     {
+        //camera + UI
         Camera = GameObject.Find("Main Camera");
+        initCameraPos = Camera.transform.position;
         ScoreText = Camera.transform.Find("ScoreText").gameObject;
         HighScoreText = Camera.transform.Find("HighScoreText").gameObject;
         GameOverText = Camera.transform.Find("GameOverText").gameObject;
+
+        //player
         Player = GameObject.Find("Player");
+        initPlayerPos = Player.transform.position;
 
         //set up UI
         ScoreText.GetComponent<TextMesh>().text = "00000";
