@@ -1,8 +1,9 @@
 ﻿/*
 PlayerController.cs
 by Kaijie Zhou
+Edited by Deepti Ramani
 01/30/2020
-This class controls the player's input + movement options
+This class controls the player's input + movement options (jump & duck)
 */
 
 using System.Collections;
@@ -17,25 +18,31 @@ public class PlayerController : MonoBehaviour
 
     //Variables for horizontal movement
     public float speedMultiplier = 1.001f;
-    public float baseHorizontalSpeed = 0.01f;
+    public float baseHorizontalSpeed = 0.02f;
     public float currHorizontalSpeed = 0.00f;
-    public float maxHorizontalSpeed = 0.15f;
+    public float maxHorizontalSpeed = 0.125f;
     public Vector3 newXPos;
 
     //Variables for vertical movement
-    public float baseSpeed = 2.5f;
+    public float jumpSpeed = 0.0f;
+    public float baseJumpSpeed = 10.0f;
+    public float jumpMultiplier = 3.0f;
 
-    bool isJump = false;
-    bool isQuickFall = false;
-    bool isGrounded = true;
+    //Timer for time key held to make jump height different
+    public float jumpHeight = 0.0f;
+    public float quickFallMultiplier = 2.0f;
+
+    //Jump cooldown timer
+    public float maxJumpCooldown = 1.0f;
+    public float jumpCooldown;
+
+    public bool isJump = false;
+    public bool isDown = false;
+    public bool isGrounded = true;
 
     public float groundPosition;
-    public float buffer;
     public string groundToFind = "Ground";
-    //Jump cooldown timer
-    float JumpCooldown = 0.001f;
-    //Timer for time key held to make jump height different
-    float JumpHeightTimer = 0f;
+
     //original positionto check if climax of jump
     Vector3 OriginalPosition;
 
@@ -45,8 +52,11 @@ public class PlayerController : MonoBehaviour
         GameControl = GameObject.Find("GameControl");
 
         OriginalPosition = gameObject.transform.position;
+
         //set groundPosition to top of ground platform Y.
         groundPosition = GameObject.FindWithTag(groundToFind).transform.position.y;
+
+        jumpCooldown = maxJumpCooldown;
 
         //set base horizontal speed + pos
         currHorizontalSpeed = baseHorizontalSpeed;
@@ -65,12 +75,51 @@ public class PlayerController : MonoBehaviour
             currHorizontalSpeed *= speedMultiplier;
         }
         groundPosition = GameObject.FindWithTag(groundToFind).transform.position.y;
+
+        //vertical movement uses up/down arrows and space bar as input
+        isJump = Input.GetAxis("Jump") > 0;
+        if (isJump)
+        {
+            jumpHeight = Input.GetAxis("Jump");
+        }
+        isDown = Input.GetAxis("Jump") < 0;
+
+        //cooldown after jump
+        if (jumpCooldown > 0.0f)
+        {
+            jumpCooldown -= Time.fixedDeltaTime;
+        }
+
+        //player can jump if they are on the ground & finished with cooldown
+        if (isGrounded && isJump && jumpCooldown <= 0.0f)
+        {
+            isGrounded = false;
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed, 0);
+        }
+        //at peak, start falling
+        if (!isGrounded && gameObject.transform.position.y - OriginalPosition.y >= jumpHeight * jumpMultiplier)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed * -1, 0);
+        }
+        //fall down twice as fast
+        if (!isGrounded && isDown)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed * quickFallMultiplier * -1, 0);
+        }
+
+
+        //player can duck if they are on the ground and press down arrow
+        if (isGrounded && isDown)
+        {
+            //TODO: duck
+            Debug.Log("Duck");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //if it hits an obstacle, quit
-        if(collider.gameObject.tag == "Obstacle")
+        if (collider.gameObject.tag == "Obstacle")
         {
             GameControl.GetComponent<GameControl>().GameOver();
         }
@@ -80,56 +129,5 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
-    }
-    private void FixedUpdate()
-    {
-        //Key Events: Up / Space and down arrow
-        isJump = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space);
-        isQuickFall = Input.GetKey(KeyCode.DownArrow);
-        //is player in the air?
-        if (gameObject.transform.position.y > groundPosition + buffer + 0.5 )
-        {
-            isGrounded = false;
-
-        }
-
-        //Debug
-        Debug.Log("isJump: " + isJump + " | isQuickfall: " + isQuickFall + " | isGrounded: " + isGrounded);
-
-        //set buffer to distance between player position and groundToFind.
-        buffer = gameObject.transform.position.y - GameObject.FindWithTag(groundToFind).transform.position.y;
-        while (JumpCooldown > 0f)
-        {
-            JumpCooldown -= Time.fixedDeltaTime;
-        }
-        
-        if (isGrounded && isJump)
-        {
-            //record amount of time key held down for then multiply temp variable of how high to jump
-            while (JumpHeightTimer <= .5f)
-            {
-                JumpHeightTimer += Time.fixedDeltaTime;
-            }
-            //once JumpHeightTimer is past a minimum value, multiply JumpHeightTimer to amount for jump. 
-
-            //Temp: Minimum 0.5f for timer, 8 for jump height  
-          
-            //Use Rigidbody velocity and vector3.
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, JumpHeightTimer * 6 * baseSpeed, 0);
-            //once reached highest point of jump, start falling at accurate velocity.
-
-            //Temp: same as with jumping.Climax of jump capped 1 second.
-            if ((Math.Abs(gameObject.transform.position.y) - Math.Abs(OriginalPosition.y)) == (JumpHeightTimer * 6 * .7f))
-            {
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, (JumpHeightTimer * 6) * baseSpeed * -1, 0);
-            }
-        }
-
-        if (isQuickFall)
-        {
-            //Temp: fall down at twice the rate of normal.
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, (JumpHeightTimer * 6) * baseSpeed * -2, 0);
-        }
-        
     }
 }
