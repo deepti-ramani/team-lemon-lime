@@ -49,10 +49,6 @@ public class GameControl : MonoBehaviour
         //hide end game ui
         GameOverText.SetActive(false);
         RestartButton.SetActive(false);
-
-        //game paused until first jump
-        Camera.GetComponent<CameraScroll>().currSpeed = 0;
-
     }
 
     // Start is called before the first frame update
@@ -70,7 +66,9 @@ public class GameControl : MonoBehaviour
             inGame = true;
             Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
             Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
-
+            Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
+            Player.GetComponent<PlayerController>().jumpSpeed = Player.GetComponent<PlayerController>().baseJumpSpeed;
+            Player.GetComponent<PlayerController>().isGrounded = true;
         }
         //increment score while game is playing
         if (inGame)
@@ -129,6 +127,7 @@ public class GameControl : MonoBehaviour
         //stop moving and display end game ui
         Camera.GetComponent<CameraScroll>().currSpeed = 0.0f;
         Player.GetComponent<PlayerController>().currHorizontalSpeed = 0.0f;
+        Player.GetComponent<PlayerController>().jumpSpeed = 0.0f;
         GameOverText.SetActive(true);
         RestartButton.SetActive(true);
 
@@ -159,6 +158,7 @@ public class GameControl : MonoBehaviour
         Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
         Camera.transform.position = initCameraPos;
         Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
+        Player.GetComponent<PlayerController>().jumpSpeed = Player.GetComponent<PlayerController>().baseJumpSpeed;
         Player.transform.position = initPlayerPos;
     }
 }

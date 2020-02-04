@@ -229,9 +229,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1.001
-  baseSpeed: 0.01
-  currSpeed: 0.01
-  maxSpeed: 0.15
+  baseSpeed: 0.02
+  currSpeed: 0
+  maxSpeed: 0.125
   newPos: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -390,6 +390,7 @@ MonoBehaviour:
   score: 0
   highScore: 0
   scoreTimer: 0
+  flicker: 0
   ScoreText: {fileID: 0}
   HighScoreText: {fileID: 0}
   GameOverText: {fileID: 0}
