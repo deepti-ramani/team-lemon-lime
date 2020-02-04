@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameControl: {fileID: 0}
-  minOffset: 7
-  maxOffset: 15
+  minOffset: 10
+  maxOffset: 20
   PosToGenerate: {x: 0, y: 0}
   randObject: 0
   CactusList:
