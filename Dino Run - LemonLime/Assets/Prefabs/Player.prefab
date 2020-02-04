@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1323909369635587234}
   - component: {fileID: 1323909369635587235}
   - component: {fileID: 4461305246827810803}
-  - component: {fileID: 3311690983613601124}
   - component: {fileID: -4821277566760635337}
+  - component: {fileID: 6839350879562527429}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1323909369635587232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.5, y: -1.25, z: 0}
-  m_LocalScale: {x: 0.75, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 915f2e2a92f321543933ffcae3f99055, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c90edeef4ab9c549a4fec58b1cf9ed1, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,32 +105,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3311690983613601124
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323909369635587232}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &-4821277566760635337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +121,7 @@ MonoBehaviour:
   speedMultiplier: 1.001
   baseHorizontalSpeed: 0.02
   currHorizontalSpeed: 0
-  maxHorizontalSpeed: 0.125
+  maxHorizontalSpeed: 0.1
   newXPos: {x: 0, y: 0, z: 0}
   jumpSpeed: 0
   baseJumpSpeed: 10
@@ -161,3 +135,31 @@ MonoBehaviour:
   isGrounded: 1
   groundPosition: 0
   groundToFind: Ground
+--- !u!68 &6839350879562527429
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323909369635587232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 1.1224842, y: 3.281019}
+  - {x: -0.016016006, y: 3.3009248}
+  - {x: -0.028699875, y: 2.4280102}
+  - {x: -0.81657124, y: 1.8744545}
+  - {x: -1.1530113, y: 2.352133}
+  - {x: -1.1702232, y: 1.584444}
+  - {x: -0.6627035, y: 1.0659707}
+  - {x: -0.61002827, y: 0.59968877}
+  - {x: 0.22219563, y: 0.6137819}
+  - {x: 0.17849159, y: 1.1506581}
+  - {x: 1.1124268, y: 2.5664375}
+  - {x: 1.1032867, y: 3.2810192}
