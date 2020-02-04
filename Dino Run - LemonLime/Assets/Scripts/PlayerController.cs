@@ -7,6 +7,7 @@ This class controls the player's input + movement options
 
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
         {
             currHorizontalSpeed *= speedMultiplier;
         }
-
+        groundPosition = GameObject.FindWithTag(groundToFind).transform.position.y;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -73,13 +74,11 @@ public class PlayerController : MonoBehaviour
         {
             GameControl.GetComponent<GameControl>().GameOver();
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if colided with ground, isGrounded is true
-        if (collision.gameObject.name == groundToFind) {
+        //if collided with ground
+        if (collider.gameObject.tag == "Ground") {
             isGrounded = true;
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
     }
     private void FixedUpdate()
@@ -87,15 +86,18 @@ public class PlayerController : MonoBehaviour
         //Key Events: Up / Space and down arrow
         isJump = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space);
         isQuickFall = Input.GetKey(KeyCode.DownArrow);
-        //Is player on the ground?
-        //Check if player is collided with ground via groundToFind
-        
+        //is player in the air?
+        if (gameObject.transform.position.y > groundPosition + buffer + 0.5 )
+        {
+            isGrounded = false;
+
+        }
 
         //Debug
         Debug.Log("isJump: " + isJump + " | isQuickfall: " + isQuickFall + " | isGrounded: " + isGrounded);
 
         //set buffer to distance between player position and groundToFind.
-        buffer = gameObject.transform.position.y - GameObject.Find(groundToFind).transform.position.y;
+        buffer = gameObject.transform.position.y - GameObject.FindWithTag(groundToFind).transform.position.y;
         while (JumpCooldown > 0f)
         {
             JumpCooldown -= Time.fixedDeltaTime;
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour
             //once reached highest point of jump, start falling at accurate velocity.
 
             //Temp: same as with jumping.Climax of jump capped 1 second.
-            if ((gameObject.transform.position.y - OriginalPosition.y) == (JumpHeightTimer * 6 * .7f))
+            if ((Math.Abs(gameObject.transform.position.y) - Math.Abs(OriginalPosition.y)) == (JumpHeightTimer * 6 * .7f))
             {
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, (JumpHeightTimer * 6) * baseSpeed * -1, 0);
             }

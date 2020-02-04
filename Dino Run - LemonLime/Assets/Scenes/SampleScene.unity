@@ -228,8 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d70e44a18d7c340bf3b163d647cdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.001
-  baseSpeed: 0.01
+  speedMultiplier: 1.0001
+  baseSpeed: 0.0375
   currSpeed: 0.01
   maxSpeed: 0.15
   newPos: {x: 0, y: 0, z: 0}
@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameControl: {fileID: 0}
-  minOffset: 7
-  maxOffset: 15
+  minOffset: 10
+  maxOffset: 20
   PosToGenerate: {x: 0, y: 0}
   randObject: 0
   CactusList:
@@ -792,6 +792,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4821277566760635337, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: speedMultiplier
+      value: 1.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: -4821277566760635337, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: baseHorizontalSpeed
+      value: 0.0375
+      objectReference: {fileID: 0}
     - target: {fileID: 1323909369635587232, guid: 469a66af1a132cc4a9d111c74df8b614,
         type: 3}
       propertyPath: m_Name
@@ -816,6 +826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461305246827810803, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 469a66af1a132cc4a9d111c74df8b614, type: 3}

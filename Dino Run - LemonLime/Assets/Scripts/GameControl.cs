@@ -5,6 +5,7 @@ by Deepti Ramani
 This class keeps track of score and game's current state (intro, win, lose, etc)
 */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class GameControl : MonoBehaviour
     public int score = 0;
     public int highScore = 0;
     public float scoreTimer = 0.0f;
+    public bool flicker = false;
     public GameObject ScoreText;
     public GameObject HighScoreText;
 
@@ -25,6 +27,7 @@ public class GameControl : MonoBehaviour
     public GameObject GameOverText;
     public GameObject RestartButton;
 
+    //game objects
     public GameObject Camera;
     public Vector3 initCameraPos = new Vector3(0, 0, -10);
     public GameObject Player;
@@ -78,9 +81,18 @@ public class GameControl : MonoBehaviour
             {
                 score++;
                 scoreTimer = 0.0f;
-                ScoreText.GetComponent<TextMesh>().text = "" + score;
+                //update score when not flickering
+                if (!flicker)
+                {
+                    ScoreText.GetComponent<TextMesh>().text = string.Format(String.Format("{0:00000}", score));
+                }
             }
-            //TODO: flicker on 100s
+            //flicker on 100s
+            if(score % 100 == 0 && score > 0)
+            {
+                flicker = true;
+                StartCoroutine(FlickerText(ScoreText));
+            }
         }
 
         //for debugging (auto quit/restart)
@@ -92,6 +104,20 @@ public class GameControl : MonoBehaviour
         {
             Restart();
         }
+    }
+
+    //flickers text on/off
+    IEnumerator FlickerText(GameObject Text)
+    {
+        yield return new WaitForSeconds(0.3f);
+        Text.SetActive(false);
+        yield return new WaitForSeconds(0.3f);
+        Text.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        Text.SetActive(false);
+        yield return new WaitForSeconds(0.3f);
+        Text.SetActive(true);
+        flicker = false;
     }
 
     //call this when the game ends to check high score and print game over message
@@ -110,7 +136,7 @@ public class GameControl : MonoBehaviour
         if(score > highScore)
         {
             highScore = score;
-            HighScoreText.GetComponent<TextMesh>().text = "HI " + highScore;
+            HighScoreText.GetComponent<TextMesh>().text = "HI " + string.Format(String.Format("{0:00000}", highScore));
         }
     }
 
@@ -129,7 +155,7 @@ public class GameControl : MonoBehaviour
         //regenerate ground
         Camera.GetComponent<GroundGeneration>().InstantiateInitGround();
 
-        //reset camera movement
+        //reset camera & player movement
         Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
         Camera.transform.position = initCameraPos;
         Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
