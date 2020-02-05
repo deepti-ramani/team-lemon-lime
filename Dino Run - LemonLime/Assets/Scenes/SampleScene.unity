@@ -323,7 +323,7 @@ MonoBehaviour:
   - -1.25
   - 0
   - 1.25
-  Bird: {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
+  Bird: {fileID: 5010454606708057939, guid: 6c6b35f0c62767a4a8a45d18bf150067, type: 3}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +399,6 @@ MonoBehaviour:
   Camera: {fileID: 0}
   initCameraPos: {x: 0, y: 0, z: -10}
   Player: {fileID: 0}
-  initPlayerPos: {x: -7.5, y: -1.25, z: 0}
 --- !u!1 &583012143
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,12 +803,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1323909369635587235, guid: 469a66af1a132cc4a9d111c74df8b614,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c74f6fb1a1487954589cececa224cc11,
-        type: 3}
     - target: {fileID: 4461305246827810803, guid: 469a66af1a132cc4a9d111c74df8b614,
         type: 3}
       propertyPath: m_Constraints
