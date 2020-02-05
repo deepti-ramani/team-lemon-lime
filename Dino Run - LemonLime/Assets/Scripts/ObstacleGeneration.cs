@@ -15,7 +15,7 @@ public class ObstacleGeneration : MonoBehaviour
     public GameObject GameControl;
     public float minOffset = 10.0f;
     public float maxOffset = 20.0f;
-    private float targetPos;
+    public float targetPos;
 
     //where to generate
     public Vector2 PosToGenerate = Vector2.zero;
@@ -46,7 +46,7 @@ public class ObstacleGeneration : MonoBehaviour
             if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
             {
                 //find a random position to generate
-                PosToGenerate = new Vector2(transform.position.x + 10.0f, -1.25f);
+                PosToGenerate = new Vector2(transform.position.x + 9.5f, -1.25f);
 
                 //instantiate random cactus variation
                 randObject = Random.Range(0, CactusList.Length);
@@ -57,7 +57,7 @@ public class ObstacleGeneration : MonoBehaviour
             else if (Random.Range(0.0f, 1.0f) <= 0.33f)
             {
                 //pick one of three positions (low, middle, high)
-                PosToGenerate = new Vector2(transform.position.x + 10.0f, BirdYPos[Random.Range(0, 3)]);
+                PosToGenerate = new Vector2(transform.position.x + 9.5f, BirdYPos[Random.Range(0, 3)]);
 
                 //instantiate
                 Instantiate(Bird, PosToGenerate, transform.rotation);

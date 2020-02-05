@@ -121,14 +121,14 @@ MonoBehaviour:
   speedMultiplier: 1.001
   baseHorizontalSpeed: 0.02
   currHorizontalSpeed: 0
-  maxHorizontalSpeed: 0.1
+  maxHorizontalSpeed: 0.11
   newXPos: {x: 0, y: 0, z: 0}
   jumpSpeed: 0
   baseJumpSpeed: 10
   jumpMultiplier: 3
   jumpHeight: 0
   quickFallMultiplier: 2
-  maxJumpCooldown: 0.1
+  maxJumpCooldown: 1
   jumpCooldown: 0
   isJump: 0
   isDown: 0

@@ -231,7 +231,7 @@ MonoBehaviour:
   speedMultiplier: 1.001
   baseSpeed: 0.02
   currSpeed: 0
-  maxSpeed: 0.1
+  maxSpeed: 0.11
   newPos: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -832,6 +832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461305246827810803, guid: 469a66af1a132cc4a9d111c74df8b614,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 469a66af1a132cc4a9d111c74df8b614, type: 3}

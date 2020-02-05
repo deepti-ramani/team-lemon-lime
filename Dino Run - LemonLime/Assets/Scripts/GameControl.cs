@@ -161,6 +161,7 @@ public class GameControl : MonoBehaviour
 
         //reset camera & player movement
         Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
+        Camera.GetComponent<ObstacleGeneration>().targetPos = transform.position.x + UnityEngine.Random.Range(1.0f, 3.0f);
         Camera.transform.position = initCameraPos;
         Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
         Player.GetComponent<PlayerController>().jumpSpeed = Player.GetComponent<PlayerController>().baseJumpSpeed;

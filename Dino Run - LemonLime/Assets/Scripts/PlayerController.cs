@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     //Variables for vertical movement
     public float jumpSpeed = 0.0f;
-    public float baseJumpSpeed = 7.5f;
+    public float baseJumpSpeed = 8.0f;
     public float jumpMultiplier = 3.0f;
 
     //Timer for time key held to make jump height different
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         isJump = Input.GetAxis("Jump") > 0;
         if (isJump)
         {
-            jumpHeight = Input.GetAxis("Jump");
+            jumpHeight = Input.GetAxis("Jump") * 0.75f;
         }
         isDown = Input.GetAxis("Jump") < 0;
 

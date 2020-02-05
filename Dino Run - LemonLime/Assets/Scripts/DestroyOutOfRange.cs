@@ -12,6 +12,8 @@ using UnityEngine;
 public class DestroyOutOfRange : MonoBehaviour
 {
     public GameObject Camera;
+    public float distanceToDestroy = 20.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class DestroyOutOfRange : MonoBehaviour
     void Update()
     {
         //generate if camera approaches edge of ground
-        if (Vector2.Distance((Vector2)Camera.transform.position, (Vector2)transform.position) >= 20.0f)
+        if (Mathf.Abs(Vector2.Distance((Vector2)Camera.transform.position, (Vector2)transform.position)) >= distanceToDestroy)
         {
             Destroy(gameObject);
         }

@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
+  distanceToDestroy: 10
 --- !u!61 &2296148302323648872
 BoxCollider2D:
   m_ObjectHideFlags: 0
