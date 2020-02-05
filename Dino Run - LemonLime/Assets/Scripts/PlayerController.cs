@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     //game control for end game
     public GameObject GameControl;
 
+    public Animator myAnimator;
+
     //Variables for horizontal movement
     public float speedMultiplier = 1.001f;
     public float baseHorizontalSpeed = 0.02f;
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GameControl = GameObject.Find("GameControl");
+        myAnimator = gameObject.GetComponentInChildren<Animator>();
 
         OriginalPosition = gameObject.transform.position;
 
@@ -128,6 +131,18 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "Ground") {
             isGrounded = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
+    }
+
+    private void SwitchAnimation()
+    {
+        if(/* duck */)
+        {
+            myAnimator.SetInteger("State", 1);
+        }
+        else
+        {
+            myAnimator.SetInteger("State", 2);
         }
     }
 }
