@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isJump = false;
     public bool isDown = false;
+    public bool isDuck = false;
+    public bool isDead = false;
     public bool isGrounded = true;
 
     public float groundPosition;
@@ -110,32 +112,80 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed * quickFallMultiplier * -1, 0);
         }
 
-
         //player can duck if they are on the ground and press down arrow
         if (isGrounded && isDown)
         {
             //TODO: duck
+            isDuck = true;
             Debug.Log("Duck");
         }
+        else
+        {
+            isDuck = false;
+        }
+
+        SelectAnimation();
     }
 
+    //collisions with obstacles and ground
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //if it hits an obstacle, quit
         if (collider.gameObject.tag == "Obstacle")
         {
+            isDead = true;
             GameControl.GetComponent<GameControl>().GameOver();
         }
 
-        //if collided with ground
+        //if collided with ground, its running
         if (collider.gameObject.tag == "Ground") {
             isGrounded = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
     }
 
-    public void SwitchAnimation(int animationIndex)
+    //switch between animations
+    public void SelectAnimation()
     {
-        myAnimator.SetInteger("State", animationIndex);
+        //dead has highest priority
+        if (isDead)
+        {
+            myAnimator.SetInteger("State", 3);
+        }
+        //then jump
+        else if(isJump)
+        {
+            myAnimator.SetInteger("State", 4);
+        }
+        //then duck
+        else if(isDuck)
+        {
+            //go down for duck
+            transform.position = new Vector3(transform.position.x, OriginalPosition.y - 0.3f, transform.position.y);
+            myAnimator.SetInteger("State", 2);
+        }
+        //then normal running has the lowest priority
+        else
+        {
+            if (isGrounded)
+            {
+                transform.position = new Vector3(transform.position.x, OriginalPosition.y, transform.position.y);
+            }
+            myAnimator.SetInteger("State", 1);
+        }
+    }
+
+    //reset for next try
+    public void ResetValues()
+    {
+        isJump = false;
+        isDown = false;
+        isDuck = false;
+        isDead = false;
+        isGrounded = true;
+
+        transform.position = OriginalPosition;
+        jumpSpeed = baseJumpSpeed;
+        currHorizontalSpeed = baseHorizontalSpeed;
     }
 }

@@ -31,7 +31,6 @@ public class GameControl : MonoBehaviour
     public GameObject Camera;
     public Vector3 initCameraPos;
     public GameObject Player;
-    public Vector3 initPlayerPos;
 
     // Awake is called before start
     void Awake()
@@ -45,7 +44,6 @@ public class GameControl : MonoBehaviour
 
         //player
         Player = GameObject.Find("Player");
-        initPlayerPos = Player.transform.position;
 
         //set up UI
         ScoreText.GetComponent<TextMesh>().text = "00000";
@@ -163,8 +161,7 @@ public class GameControl : MonoBehaviour
         Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
         Camera.GetComponent<ObstacleGeneration>().targetPos = transform.position.x + UnityEngine.Random.Range(1.0f, 3.0f);
         Camera.transform.position = initCameraPos;
-        Player.GetComponent<PlayerController>().currHorizontalSpeed = Player.GetComponent<PlayerController>().baseHorizontalSpeed;
-        Player.GetComponent<PlayerController>().jumpSpeed = Player.GetComponent<PlayerController>().baseJumpSpeed;
-        Player.transform.position = initPlayerPos;
+
+        Player.GetComponent<PlayerController>().ResetValues();
     }
 }
