@@ -134,15 +134,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SwitchAnimation()
+    public void SwitchAnimation(int animationIndex)
     {
-        if(/* duck */)
-        {
-            myAnimator.SetInteger("State", 1);
-        }
-        else
-        {
-            myAnimator.SetInteger("State", 2);
-        }
+        myAnimator.SetInteger("State", animationIndex);
     }
 }
