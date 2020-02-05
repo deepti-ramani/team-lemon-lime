@@ -38,12 +38,14 @@ public class PlayerController : MonoBehaviour
     public float maxJumpCooldown = 1.0f;
     public float jumpCooldown;
 
+    //player states
     public bool isJump = false;
     public bool isDown = false;
     public bool isDuck = false;
     public bool isDead = false;
     public bool isGrounded = true;
 
+    //find ground for jump
     public float groundPosition;
     public string groundToFind = "Ground";
 
@@ -160,7 +162,7 @@ public class PlayerController : MonoBehaviour
         //then duck
         else if(isDuck)
         {
-            //go down for duck
+            //go down for duck and change collider
             transform.position = new Vector3(transform.position.x, OriginalPosition.y - 0.3f, transform.position.y);
             myAnimator.SetInteger("State", 2);
         }
