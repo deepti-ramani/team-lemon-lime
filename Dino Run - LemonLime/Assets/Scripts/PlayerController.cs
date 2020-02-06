@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     public float jumpMultiplier = 3.0f;
 
     //height to jump
-    public float baseJumpHeight = 0.75f;
-    public float maxJumpHeight = 0.75f;
+    public float baseJumpHeight = 1.0f;
+    public float maxJumpHeight = 1.0f;
     public float currJumpHeight = 0.0f;
     public float quickFallMultiplier = 2.0f;
 
@@ -71,8 +71,7 @@ public class PlayerController : MonoBehaviour
 
         currJumpCooldown = maxJumpCooldown;
 
-        //set base horizontal speed + pos
-        currHorizontalSpeed = baseHorizontalSpeed;
+        //set pos
         newXPos = transform.position;
     }
 
@@ -174,7 +173,7 @@ public class PlayerController : MonoBehaviour
             switch (type)
             {
                 case PowerupType.IncreaseJumpHeight:
-                    maxJumpHeight = 1.25f;
+                    maxJumpHeight = 1.5f;
                     break;
             }
         }

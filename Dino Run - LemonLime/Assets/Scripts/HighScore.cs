@@ -9,25 +9,21 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HighScore : MonoBehaviour
 {
     //top 10 high scores
-    public int[] highScoreList = { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6};
+    public int[] highScoreList = new int[10];
     //TODO: add names
+    //public string[] highScoreNames = new string[10];
+
+    public GameObject HighScoreDisplay;
 
     // Start is called before the first frame update
     void Start()
     {
-        //test addScore
-        AddScore(10);
-        AddScore(16);
-        AddScore(5);
-        Debug.Log("Sorted list: ");
-        for(int i = 0; i < highScoreList.Length; i++)
-        {
-            Debug.Log(highScoreList[i]);
-        }
+        HighScoreDisplay.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,18 +31,28 @@ public class HighScore : MonoBehaviour
     {
         
     }
+
     //write the high scores to a file
     public void WriteToFile()
     {
-        //File.WriteAllText("C:\\Users\\deepti.ramani\\Documents\\DinoRun\\team-lemon-lime\\Dino Run - LemonLime\\Assets\\Scripts\\HighScoreList.txt", "" + highScore + "\n");
+        string highScoreString = "";
+        for(int i = 0; i < highScoreList.Length; i++)
+        {
+            highScoreString += highScoreList[i] + "\n";
+        }
+        File.WriteAllText("C:\\Users\\deepti.ramani\\Documents\\DinoRun\\team-lemon-lime\\Dino Run - LemonLime\\Assets\\Scripts\\HighScoreList.txt", "" + highScoreString + "\n");
     }
 
-    public void WriteToScene()
+    public void DisplayHighScores()
     {
+        string highScoreString = "";
+        //fill with info from file
+        HighScoreDisplay.transform.Find("HighScoreList").gameObject.GetComponent<Text>().text = highScoreString;
 
+        HighScoreDisplay.SetActive(true);
     }
 
-    //add new score into the list and sort
+    //add new score into the list and sort (highest to lowest)
     public void AddScore(int addedScore)
     {
         int temp;

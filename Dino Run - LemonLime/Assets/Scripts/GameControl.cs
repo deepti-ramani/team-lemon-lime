@@ -61,7 +61,11 @@ public class GameControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //if restart button clicked, run game over function
+        RestartButton.GetComponent<Button>().onClick.AddListener(GameOver);
 
+        //if high score list button clicked, show high scores
+        //HighScoreButton.GetComponent<Button>().onClick.AddListener()
     }
 
     // Update is called once per frame
@@ -99,12 +103,6 @@ public class GameControl : MonoBehaviour
                 StartCoroutine(FlickerText(ScoreText));
             }
         }
-
-        //if restart button clicked, run game over function
-        RestartButton.GetComponent<Button>().onClick.AddListener(GameOver);
-
-        //if high score list button clicked, show high scores
-        //HighScoreButton.GetComponent<Button>().onClick.AddListener()
 
         //for debugging (auto quit/restart)
         if(Input.GetKeyDown(KeyCode.Q))
@@ -171,10 +169,8 @@ public class GameControl : MonoBehaviour
         RestartButton.SetActive(false);
         HighScoreButton.SetActive(false);
 
-        //regenerate ground
-        Camera.GetComponent<GroundGeneration>().InstantiateInitGround();
-
         //reset camera & player movement
+        Camera.GetComponent<GroundGeneration>().InstantiateInitGround();
         Camera.GetComponent<CameraScroll>().currSpeed = Camera.GetComponent<CameraScroll>().baseSpeed;
         Camera.GetComponent<ObstacleGeneration>().targetPos = transform.position.x + UnityEngine.Random.Range(1.0f, 3.0f);
         Camera.transform.position = initCameraPos;

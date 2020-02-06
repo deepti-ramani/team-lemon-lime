@@ -25,7 +25,7 @@ public class DestroyOutOfRange : MonoBehaviour
     void Update()
     {
         //generate if camera approaches edge of ground
-        if (Mathf.Abs(Vector2.Distance((Vector2)Camera.transform.position, (Vector2)transform.position)) >= distanceToDestroy)
+        if (Mathf.Abs(Vector2.Distance((Vector2)Camera.transform.position, (Vector2)transform.position)) > distanceToDestroy)
         {
             Destroy(gameObject);
         }
