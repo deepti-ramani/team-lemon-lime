@@ -1,7 +1,6 @@
 ﻿/*
 PlayerController.cs
-by Kaijie Zhou
-Edited by Deepti Ramani
+by Kaijie Zhou and Deepti Ramani
 01/30/2020
 This class controls the player's input + movement options (jump & duck)
 */

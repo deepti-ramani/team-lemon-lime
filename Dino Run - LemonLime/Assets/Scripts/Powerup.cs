@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+Powerup.cs
+by Deepti Ramani
+02/05/2020
+
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

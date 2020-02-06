@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class GameControl : MonoBehaviour
     //game over
     public GameObject GameOverText;
     public GameObject RestartButton;
+    public GameObject HighScoreButton;
 
     //game objects
     public GameObject Camera;
@@ -49,9 +51,11 @@ public class GameControl : MonoBehaviour
         ScoreText.GetComponent<TextMesh>().text = "00000";
         HighScoreText.GetComponent<TextMesh>().text = "HI 00000";
         GameOverText.GetComponent<TextMesh>().text = "G A M E  O V E R";
+
         //hide end game ui
         GameOverText.SetActive(false);
         RestartButton.SetActive(false);
+        HighScoreButton.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -96,6 +100,12 @@ public class GameControl : MonoBehaviour
             }
         }
 
+        //if restart button clicked, run game over function
+        RestartButton.GetComponent<Button>().onClick.AddListener(GameOver);
+
+        //if high score list button clicked, show high scores
+        //HighScoreButton.GetComponent<Button>().onClick.AddListener()
+
         //for debugging (auto quit/restart)
         if(Input.GetKeyDown(KeyCode.Q))
         {
@@ -107,6 +117,7 @@ public class GameControl : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.S))
         {
+            //test birds
             score = 500;
         }
     }
@@ -137,9 +148,10 @@ public class GameControl : MonoBehaviour
         Player.GetComponent<PlayerController>().jumpSpeed = 0.0f;
         GameOverText.SetActive(true);
         RestartButton.SetActive(true);
+        HighScoreButton.SetActive(true);
 
         //check high score
-        if(score > highScore)
+        if (score > highScore)
         {
             highScore = score;
             HighScoreText.GetComponent<TextMesh>().text = "HI " + string.Format(String.Format("{0:00000}", highScore));
@@ -157,6 +169,7 @@ public class GameControl : MonoBehaviour
         ScoreText.GetComponent<TextMesh>().text = "00000";
         GameOverText.SetActive(false);
         RestartButton.SetActive(false);
+        HighScoreButton.SetActive(false);
 
         //regenerate ground
         Camera.GetComponent<GroundGeneration>().InstantiateInitGround();
