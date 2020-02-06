@@ -100,7 +100,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 569055498668960721, guid: b27c7805dbfd24448b9e09ad90ce28ca, type: 3}
+  m_Sprite: {fileID: 7917379365854507156, guid: 4e77abe08ee312446900dee5bdd6a1f6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
-  distanceToDestroy: 10
+  distanceToDestroy: 9.5
 --- !u!95 &5010454606708057941
 Animator:
   serializedVersion: 3

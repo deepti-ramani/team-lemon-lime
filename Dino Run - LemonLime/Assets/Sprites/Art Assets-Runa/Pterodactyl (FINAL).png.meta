@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 7473b17f0195d5f4d8c9912ebe5e0a1c
+guid: 4e77abe08ee312446900dee5bdd6a1f6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6810762251165338722
-    second: Dino Running (FINAL)_0
+      213: 7917379365854507156
+    second: Pterodactyl (FINAL)_0
   - first:
-      213: 2983008474529279814
-    second: Dino Running (FINAL)_1
+      213: -3921551681758980155
+    second: Pterodactyl (FINAL)_1
+  - first:
+      213: 5795002773069276161
+    second: Pterodactyl (FINAL)_2
+  - first:
+      213: 7730870583543545928
+    second: Pterodactyl (FINAL)_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -104,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dino Running (FINAL)_0
+      name: Pterodactyl (FINAL)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 43
-        width: 40
-        height: 43
+        y: 36
+        width: 42
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9376a941df4b71a0800000000000000
-      internalID: -6810762251165338722
+      spriteID: 490f3cdc59e20ed60800000000000000
+      internalID: 7917379365854507156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dino Running (FINAL)_1
+      name: Pterodactyl (FINAL)_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 40
-        height: 43
+        x: 42
+        y: 36
+        width: 42
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,8 +145,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64f2c462766c56920800000000000000
-      internalID: 2983008474529279814
+      spriteID: 5c79b60d589d399c0800000000000000
+      internalID: -3921551681758980155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pterodactyl (FINAL)_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 42
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 104a231a15cfb6050800000000000000
+      internalID: 5795002773069276161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pterodactyl (FINAL)_3
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 42
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84041a8f5d1994b60800000000000000
+      internalID: 7730870583543545928
       vertices: []
       indices: 
       edges: []
