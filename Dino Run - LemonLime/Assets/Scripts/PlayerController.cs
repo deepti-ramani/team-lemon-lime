@@ -16,27 +16,34 @@ public class PlayerController : MonoBehaviour
     //game control for end game
     public GameObject GameControl;
 
+    //animator for switching animations
     public Animator myAnimator;
 
     //Variables for horizontal movement
     public float speedMultiplier = 1.001f;
     public float baseHorizontalSpeed = 0.02f;
-    public float currHorizontalSpeed = 0.00f;
-    public float maxHorizontalSpeed = 0.1f;
+    public float currHorizontalSpeed = 0.0f;
+    public float maxHorizontalSpeed = 0.11f;
     public Vector3 newXPos;
 
     //Variables for vertical movement
     public float jumpSpeed = 0.0f;
-    public float baseJumpSpeed = 8.0f;
+    public float baseJumpSpeed = 10.0f;
     public float jumpMultiplier = 3.0f;
 
-    //Timer for time key held to make jump height different
-    public float jumpHeight = 0.0f;
+    //height to jump
+    public float baseJumpHeight = 0.75f;
+    public float maxJumpHeight = 0.75f;
+    public float currJumpHeight = 0.0f;
     public float quickFallMultiplier = 2.0f;
 
     //Jump cooldown timer
     public float maxJumpCooldown = 1.0f;
-    public float jumpCooldown;
+    public float currJumpCooldown = 0.0f;
+
+    //powerup timer
+    public float maxPowerupTime = 5.0f;
+    public float currPowerupTime = 0.0f;
 
     //player states
     public bool isJump = false;
@@ -44,26 +51,26 @@ public class PlayerController : MonoBehaviour
     public bool isDuck = false;
     public bool isDead = false;
     public bool isGrounded = true;
+    public bool isPoweredUp = false;
 
     //find ground for jump
     public float groundPosition;
     public string groundToFind = "Ground";
 
     //original positionto check if climax of jump
-    Vector3 OriginalPosition;
+    public Vector3 OriginalPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         GameControl = GameObject.Find("GameControl");
         myAnimator = gameObject.GetComponentInChildren<Animator>();
-
         OriginalPosition = gameObject.transform.position;
 
         //set groundPosition to top of ground platform Y.
         groundPosition = GameObject.FindWithTag(groundToFind).transform.position.y;
 
-        jumpCooldown = maxJumpCooldown;
+        currJumpCooldown = maxJumpCooldown;
 
         //set base horizontal speed + pos
         currHorizontalSpeed = baseHorizontalSpeed;
@@ -87,31 +94,31 @@ public class PlayerController : MonoBehaviour
         isJump = Input.GetAxis("Jump") > 0;
         if (isJump)
         {
-            jumpHeight = Input.GetAxis("Jump") * 0.75f;
+            currJumpHeight = Input.GetAxis("Jump") * maxJumpHeight;
         }
         isDown = Input.GetAxis("Jump") < 0;
 
         //cooldown after jump
-        if (jumpCooldown > 0.0f)
+        if (currJumpCooldown > 0.0f)
         {
-            jumpCooldown -= Time.fixedDeltaTime;
+            currJumpCooldown -= Time.fixedDeltaTime;
         }
 
         //player can jump if they are on the ground & finished with cooldown
-        if (isGrounded && isJump && jumpCooldown <= 0.0f)
+        if (isGrounded && isJump && currJumpCooldown <= 0.0f)
         {
             isGrounded = false;
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed, 0);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, currJumpHeight * jumpSpeed, 0);
         }
         //at peak, start falling
-        if (!isGrounded && gameObject.transform.position.y - OriginalPosition.y >= jumpHeight * jumpMultiplier)
+        if (!isGrounded && gameObject.transform.position.y - OriginalPosition.y >= currJumpHeight * jumpMultiplier)
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed * -1, 0);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, currJumpHeight * jumpSpeed * -1, 0);
         }
         //fall down twice as fast
         if (!isGrounded && isDown)
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpHeight * jumpSpeed * quickFallMultiplier * -1, 0);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, currJumpHeight * jumpSpeed * quickFallMultiplier * -1, 0);
         }
 
         //player can duck if they are on the ground and press down arrow
@@ -126,6 +133,17 @@ public class PlayerController : MonoBehaviour
             isDuck = false;
         }
 
+        //powerup timer
+        if (isPoweredUp)
+        {
+            currPowerupTime += Time.deltaTime;
+            if (currPowerupTime >= maxPowerupTime)
+            {
+                currPowerupTime = 0.0f;
+                ResetPowerups();
+            }
+        }
+
         SelectAnimation();
     }
 
@@ -137,12 +155,29 @@ public class PlayerController : MonoBehaviour
         {
             isDead = true;
             GameControl.GetComponent<GameControl>().GameOver();
+            transform.position = new Vector3(transform.position.x, OriginalPosition.y, transform.position.z);
         }
 
         //if collided with ground, its running
         if (collider.gameObject.tag == "Ground") {
             isGrounded = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
+
+        //if collided with a powerup, change appropriate stat and destroy powerup
+        if (collider.gameObject.tag == "Powerup")
+        {
+            isPoweredUp = true;
+            PowerupType type = collider.gameObject.GetComponent<Powerup>().type;
+            Destroy(collider.gameObject);
+
+            //TODO: add more types
+            switch (type)
+            {
+                case PowerupType.IncreaseJumpHeight:
+                    maxJumpHeight = 1.25f;
+                    break;
+            }
         }
     }
 
@@ -155,12 +190,12 @@ public class PlayerController : MonoBehaviour
             myAnimator.SetInteger("State", 3);
         }
         //then jump
-        else if(isJump)
+        else if (isJump)
         {
             myAnimator.SetInteger("State", 4);
         }
         //then duck
-        else if(isDuck)
+        else if (isDuck)
         {
             //go down for duck and change collider
             transform.position = new Vector3(transform.position.x, OriginalPosition.y - 0.3f, transform.position.y);
@@ -189,5 +224,11 @@ public class PlayerController : MonoBehaviour
         transform.position = OriginalPosition;
         jumpSpeed = baseJumpSpeed;
         currHorizontalSpeed = baseHorizontalSpeed;
+    }
+
+    //reset all changes caused by powerups
+    private void ResetPowerups()
+    {
+        maxJumpHeight = baseJumpHeight;
     }
 }

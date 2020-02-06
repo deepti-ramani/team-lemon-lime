@@ -25,7 +25,7 @@ public class ObstacleGeneration : MonoBehaviour
     public GameObject[] CactusList = new GameObject[6];
 
     //birds
-    public int ScoreUntilBirds = 500;
+    public const int ScoreUntilBirds = 500;
     public float[] BirdYPos = { -1.25f, 0.0f, 1.25f };
     public GameObject Bird;
 
