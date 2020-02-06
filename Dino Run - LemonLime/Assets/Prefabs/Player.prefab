@@ -128,15 +128,19 @@ MonoBehaviour:
   jumpSpeed: 0
   baseJumpSpeed: 10
   jumpMultiplier: 3
-  jumpHeight: 0
+  baseJumpHeight: 0.75
+  maxJumpHeight: 0.75
+  currJumpHeight: 0
   quickFallMultiplier: 2
   maxJumpCooldown: 1
-  jumpCooldown: 0
+  maxPowerupTime: 5
+  currPowerupTime: 0
   isJump: 0
   isDown: 0
   isDuck: 0
   isDead: 0
   isGrounded: 1
+  isPoweredUp: 0
   groundPosition: 0
   groundToFind: Ground
 --- !u!68 &6839350879562527429

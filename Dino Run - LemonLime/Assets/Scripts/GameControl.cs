@@ -105,6 +105,10 @@ public class GameControl : MonoBehaviour
         {
             Restart();
         }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            score = 500;
+        }
     }
 
     //flickers text on/off

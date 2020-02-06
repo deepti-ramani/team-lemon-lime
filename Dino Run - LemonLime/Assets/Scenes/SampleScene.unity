@@ -318,7 +318,6 @@ MonoBehaviour:
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  ScoreUntilBirds: 500
   BirdYPos:
   - -1.25
   - 0
