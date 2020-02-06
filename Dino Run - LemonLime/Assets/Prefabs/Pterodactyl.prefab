@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
-  distanceToDestroy: 9.5
+  distanceToDestroy: 10
 --- !u!95 &5010454606708057941
 Animator:
   serializedVersion: 3

@@ -313,11 +313,11 @@ MonoBehaviour:
   randObject: 0
   CactusList:
   - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
-  - {fileID: 6932728932676244788, guid: bea8468ee11dae64db6f32496fb4760b, type: 3}
+  - {fileID: 2823232480446115118, guid: b2a30eb0904d6ac46863a89c5c206e80, type: 3}
+  - {fileID: 289424897244111534, guid: fbfe68b73dd170e4d83a74cd642da92a, type: 3}
+  - {fileID: 6947930249671274613, guid: 0d91b89da82c0164baa09e00f1c8cac6, type: 3}
+  - {fileID: 3641503266814911713, guid: ec977c821deda494887c274768c5074f, type: 3}
+  - {fileID: 7884725670638791031, guid: 145a6a0c50f8e1b4fb0a7c2660659e58, type: 3}
   BirdYPos:
   - -1.25
   - 0
