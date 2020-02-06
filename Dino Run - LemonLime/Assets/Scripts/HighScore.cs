@@ -47,7 +47,7 @@ public class HighScore : MonoBehaviour
     }
 
     //add new score into the list and sort
-    private void AddScore(int addedScore)
+    public void AddScore(int addedScore)
     {
         int temp;
         for(int i = 0; i < highScoreList.Length; i++)

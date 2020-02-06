@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "Powerup")
         {
             isPoweredUp = true;
-            PowerupType type = collider.gameObject.GetComponent<Powerup>().type;
+            PowerupType type = collider.gameObject.GetComponent<PowerUp>().type;
             Destroy(collider.gameObject);
 
             //TODO: add more types

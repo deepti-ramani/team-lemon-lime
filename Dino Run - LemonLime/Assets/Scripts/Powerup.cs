@@ -15,7 +15,7 @@ public enum PowerupType
     IncreaseJumpHeight
 }
 
-public class Powerup : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     public PowerupType type = PowerupType.IncreaseJumpHeight;
 
