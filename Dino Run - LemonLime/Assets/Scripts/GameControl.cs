@@ -164,4 +164,7 @@ public class GameControl : MonoBehaviour
 
         Player.GetComponent<PlayerController>().ResetValues();
     }
+    public int GetScore() {
+        return score;
+    }
 }
