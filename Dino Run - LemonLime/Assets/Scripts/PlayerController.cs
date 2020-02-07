@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 {
     //game control for end game
     public GameObject GameControl;
+    public RandomContainer randomC;
 
     //animator for switching animations
     public Animator myAnimator;
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
     {
         GameControl = GameObject.Find("GameControl");
         myAnimator = gameObject.GetComponentInChildren<Animator>();
+        randomC = GameObject.FindObjectOfType(typeof(RandomContainer)) as RandomContainer;
+
         OriginalPosition = gameObject.transform.position;
 
         //set groundPosition to top of ground platform Y.
@@ -203,6 +206,7 @@ public class PlayerController : MonoBehaviour
         //then jump
         else if (isJump)
         {
+            randomC.PlaySound();
             myAnimator.SetInteger("State", 4);
         }
         //then duck

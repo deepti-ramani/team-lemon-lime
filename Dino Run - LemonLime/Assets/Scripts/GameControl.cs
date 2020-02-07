@@ -49,8 +49,7 @@ public class GameControl : MonoBehaviour
 
         //set up UI
         ScoreText.GetComponent<TextMesh>().text = "00000";
-        HighScoreText.GetComponent<TextMesh>().text = "HI 00000";
-        GameOverText.GetComponent<TextMesh>().text = "G A M E  O V E R";
+        HighScoreText.GetComponent<TextMesh>().text = "00000";
 
         //hide end game ui
         GameOverText.SetActive(false);
@@ -62,10 +61,10 @@ public class GameControl : MonoBehaviour
     void Start()
     {
         //if restart button clicked, run game over function
-        RestartButton.GetComponent<Button>().onClick.AddListener(GameOver);
+        RestartButton.GetComponent<Button>().onClick.AddListener(Restart);
 
         //if high score list button clicked, show high scores
-        //HighScoreButton.GetComponent<Button>().onClick.AddListener()
+        //HighScoreButton.GetComponent<Button>().onClick.AddListener(DisplayHighScores)
     }
 
     // Update is called once per frame
@@ -156,7 +155,7 @@ public class GameControl : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            HighScoreText.GetComponent<TextMesh>().text = "HI " + string.Format(String.Format("{0:00000}", highScore));
+            HighScoreText.GetComponent<TextMesh>().text = string.Format(String.Format("{0:00000}", highScore));
             gameObject.GetComponent<HighScore>().AddScore(highScore);
         }
     }
