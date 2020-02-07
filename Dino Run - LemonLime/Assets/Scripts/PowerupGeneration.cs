@@ -9,10 +9,12 @@ public class NewBehaviourScript : MonoBehaviour
     public float minTimeUntilPowerup = 10.0f;
     public float maxTimeUntilPowerup = 20.0f;
     public float currTimeUntilPowerup = 10.0f;
+    public Vector3 posToGenerate;
 
     // Start is called before the first frame update
     void Start()
     {
+        posToGenerate = transform.position;
         currTimeUntilPowerup = maxTimeUntilPowerup;
     }
 
@@ -23,7 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         if(currTimeUntilPowerup <= 0)
         {
-            Instantiate(PowerupList[UnityEngine.Random.Range(0, PowerupList.Length)], transform.position, transform.rotation);
+            //Instantiate(PowerupList[UnityEngine.Random.Range(0, PowerupList.Length)], , transform.rotation);
         }
     }
 }
