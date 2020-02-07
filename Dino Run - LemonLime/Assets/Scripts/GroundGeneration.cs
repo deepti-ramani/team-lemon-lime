@@ -38,5 +38,6 @@ public class GroundGeneration : MonoBehaviour
         Instantiate(Ground[Random.Range(0, 3)], new Vector2(-4.0f, -2.0f), transform.rotation);
         Instantiate(Ground[Random.Range(0, 3)], new Vector2(6.0f, -2.0f), transform.rotation);
         Instantiate(Ground[Random.Range(0, 3)], new Vector2(16.0f, -2.0f), transform.rotation);
+        currPosToGenerate = initPosToGenerate;
     }
 }

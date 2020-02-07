@@ -118,6 +118,10 @@ public class GameControl : MonoBehaviour
             //test birds
             score = 500;
         }
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            gameObject.GetComponent<HighScore>().DisplayHighScores();
+        }
     }
 
     //flickers text on/off
@@ -153,6 +157,7 @@ public class GameControl : MonoBehaviour
         {
             highScore = score;
             HighScoreText.GetComponent<TextMesh>().text = "HI " + string.Format(String.Format("{0:00000}", highScore));
+            gameObject.GetComponent<HighScore>().AddScore(highScore);
         }
     }
 
@@ -177,7 +182,13 @@ public class GameControl : MonoBehaviour
 
         Player.GetComponent<PlayerController>().ResetValues();
     }
-    public int GetScore() {
-        return score;
+
+    //final screen; can't restart from here
+    public void CheckHighScores()
+    {
+        gameObject.GetComponent<HighScore>().DisplayHighScores();
+        GameOverText.SetActive(false);
+        RestartButton.SetActive(false);
+        HighScoreButton.SetActive(false);
     }
 }

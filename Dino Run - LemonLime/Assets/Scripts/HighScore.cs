@@ -15,6 +15,7 @@ public class HighScore : MonoBehaviour
 {
     //top 10 high scores
     public int[] highScoreList = new int[10];
+    public string highScoreString;
     //TODO: add names
     //public string[] highScoreNames = new string[10];
 
@@ -23,7 +24,10 @@ public class HighScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //hide it to start
         HighScoreDisplay.SetActive(false);
+        //get prev high score list at beginning
+        highScoreString = File.ReadAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt");
     }
 
     // Update is called once per frame
@@ -33,22 +37,19 @@ public class HighScore : MonoBehaviour
     }
 
     //write the high scores to a file
-    public void WriteToFile()
+    private void WriteToFile()
     {
-        string highScoreString = "";
         for(int i = 0; i < highScoreList.Length; i++)
         {
             highScoreString += highScoreList[i] + "\n";
         }
-        File.WriteAllText("C:\\Users\\deepti.ramani\\Documents\\DinoRun\\team-lemon-lime\\Dino Run - LemonLime\\Assets\\Scripts\\HighScoreList.txt", "" + highScoreString + "\n");
+        File.WriteAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt", "" + highScoreString + "\n");
     }
 
     public void DisplayHighScores()
     {
-        string highScoreString = "";
-        //fill with info from file
+        //fill with info from file and show
         HighScoreDisplay.transform.Find("HighScoreList").gameObject.GetComponent<Text>().text = highScoreString;
-
         HighScoreDisplay.SetActive(true);
     }
 
@@ -56,6 +57,7 @@ public class HighScore : MonoBehaviour
     public void AddScore(int addedScore)
     {
         int temp;
+        //add score
         for(int i = 0; i < highScoreList.Length; i++)
         {
             //if added score is greater than current score
@@ -69,5 +71,7 @@ public class HighScore : MonoBehaviour
                 //repeat
             }
         }
+        //write the new hs list to the file
+        WriteToFile();
     }
 }
