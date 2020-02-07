@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             currJumpHeight = Input.GetAxis("Jump") * maxJumpHeight;
         }
-        isDown = Input.GetAxis("Jump") < 0;
+        //isDown = Input.GetAxis("Jump") < 0;
 
         //cooldown after jump
         if (currJumpCooldown > 0.0f)
@@ -125,10 +125,23 @@ public class PlayerController : MonoBehaviour
             //TODO: duck
             isDuck = true;
             Debug.Log("Duck");
+
+            //Reset collider
+            gameObject.GetComponent<EdgeCollider2D>().Reset();
+            Debug.Log("Reset Collider");
+            //Make new mesh for collider
+            gameObject.GetComponent<EdgeCollider2D>().CreateMesh(true, false);
+            Debug.Log("Remade Collider");
         }
         else
         {
             isDuck = false;
+            //Reset collider
+            gameObject.GetComponent<EdgeCollider2D>().Reset();
+            Debug.Log("Reset Collider");
+            //Make new mesh for collider
+            gameObject.GetComponent<EdgeCollider2D>().CreateMesh(true, false);
+            Debug.Log("Remade Collider");
         }
 
         //powerup timer
