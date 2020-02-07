@@ -298,10 +298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d70e44a18d7c340bf3b163d647cdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.001
-  baseSpeed: 0.02
+  speedMultiplier: 0.001
+  baseSpeed: 0.05
   currSpeed: 0
-  maxSpeed: 0.11
+  maxSpeed: 0.1
   newPos: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -428,6 +428,7 @@ MonoBehaviour:
   PowerupList:
   - {fileID: 4496082421311592, guid: 7b281333ce646f94ead8f9ae9cbd4a67, type: 3}
   ObjectToInstantiate: {fileID: 0}
+  firstPos: 40
   minDist: 15
   maxDist: 25
   targetPos: 0
@@ -1075,7 +1076,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828685682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 4.64, z: 10}
+  m_LocalPosition: {x: 2.3, y: 4.64, z: 10}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -1488,7 +1489,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: c76db21f793cac94cbf1ca8cbd512cef, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4285756275
+    rgba: 4283650899
 --- !u!23 &1600217667
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1773,7 +1774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020481013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 4.9, z: 10}
+  m_LocalPosition: {x: 3, y: 4.9, z: 10}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}

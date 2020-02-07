@@ -103,7 +103,7 @@ public class GameControl : MonoBehaviour
             }
         }
 
-        //for debugging (auto quit/restart)
+        //for debugging
         if(Input.GetKeyDown(KeyCode.Q))
         {
             GameOver();
@@ -112,14 +112,13 @@ public class GameControl : MonoBehaviour
         {
             Restart();
         }
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            //test birds
-            score = 500;
-        }
         if(Input.GetKeyDown(KeyCode.H))
         {
             gameObject.GetComponent<HighScore>().DisplayHighScores();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            score = 500;
         }
     }
 

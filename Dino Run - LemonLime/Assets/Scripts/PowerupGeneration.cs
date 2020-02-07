@@ -7,6 +7,7 @@ public class PowerupGeneration : MonoBehaviour
 {
     public GameObject[] PowerupList = new GameObject[Enum.GetNames(typeof(PowerupType)).Length];
     public GameObject ObjectToInstantiate;
+    public float firstPos = 40.0f;
     public float minDist = 15.0f;
     public float maxDist = 25.0f;
     public float targetPos;
@@ -16,7 +17,8 @@ public class PowerupGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetPos = transform.position.x + UnityEngine.Random.Range(minDist, maxDist);
+        //first one is hardcoded
+        targetPos = firstPos;
     }
 
     // Update is called once per frame
@@ -30,8 +32,9 @@ public class PowerupGeneration : MonoBehaviour
             currPosToGenerate.x = transform.position.x + 10.0f;
             currPosToGenerate.y = ObjectToInstantiate.transform.position.y;
             Instantiate(ObjectToInstantiate, currPosToGenerate, transform.rotation);
+
+            //choose next position to instantiate
+            targetPos = transform.position.x + UnityEngine.Random.Range(minDist, maxDist);
         }
-        //choose next position to instantiate
-        targetPos = transform.position.x + UnityEngine.Random.Range(minDist, maxDist);
     }
 }

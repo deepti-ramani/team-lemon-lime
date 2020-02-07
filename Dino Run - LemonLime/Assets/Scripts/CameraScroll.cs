@@ -11,8 +11,8 @@ using UnityEngine;
 
 public class CameraScroll : MonoBehaviour
 {
-    public float speedMultiplier = 1.001f;
-    public float baseSpeed = 0.02f;
+    public float speedMultiplier = 0.001f;
+    public float baseSpeed = 0.05f;
     public float currSpeed = 0.00f;
     public float maxSpeed = 0.1f;
 
@@ -32,9 +32,9 @@ public class CameraScroll : MonoBehaviour
         newPos.x += currSpeed;
         newPos.z = -10;
         transform.position = newPos;
-        if(currSpeed <= maxSpeed)
+        if(currSpeed != 0 && currSpeed <= maxSpeed)
         {
-            currSpeed *= speedMultiplier;
+            currSpeed += speedMultiplier * Time.deltaTime;
         }
     }
 }

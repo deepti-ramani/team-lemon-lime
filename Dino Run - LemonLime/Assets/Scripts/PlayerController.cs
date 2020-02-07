@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     public Animator myAnimator;
 
     //Variables for horizontal movement
-    public float speedMultiplier = 1.001f;
-    public float baseHorizontalSpeed = 0.02f;
+    public float speedMultiplier = 0.001f;
+    public float baseHorizontalSpeed = 0.05f;
     public float currHorizontalSpeed = 0.0f;
     public float maxHorizontalSpeed = 0.11f;
     public Vector3 newXPos;
@@ -85,9 +85,10 @@ public class PlayerController : MonoBehaviour
         newXPos = transform.position;
         newXPos.x += currHorizontalSpeed;
         transform.position = newXPos;
-        if (currHorizontalSpeed <= maxHorizontalSpeed)
+        if (currHorizontalSpeed != 0 && currHorizontalSpeed <= maxHorizontalSpeed)
         {
-            currHorizontalSpeed *= speedMultiplier;
+            //TODO: += or *=
+            currHorizontalSpeed += speedMultiplier * Time.deltaTime;
         }
         groundPosition = GameObject.FindWithTag(groundToFind).transform.position.y;
 

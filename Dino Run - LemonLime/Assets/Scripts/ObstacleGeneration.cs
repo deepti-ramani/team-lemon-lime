@@ -46,7 +46,19 @@ public class ObstacleGeneration : MonoBehaviour
             if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
             {
                 //instantiate random cactus variation
-                randObject = Random.Range(0, CactusList.Length);
+                //TODO: weight by distace travelled (position) so that we don't get big ones in the beginning
+                if (transform.position.x < 50.0f)
+                {
+                    randObject = Random.Range(0, 2);
+                }
+                else if (transform.position.x < 80.0f)
+                {
+                    randObject = Random.Range(0, 4);
+                }
+                else
+                {
+                    randObject = Random.Range(0, CactusList.Length);
+                }
 
                 //find a random position to generate
                 PosToGenerate = new Vector2(transform.position.x + 10.0f, CactusList[randObject].transform.position.y);
