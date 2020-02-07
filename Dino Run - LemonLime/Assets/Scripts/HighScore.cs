@@ -26,8 +26,14 @@ public class HighScore : MonoBehaviour
     {
         //hide it to start
         HighScoreDisplay.SetActive(false);
-        //get prev high score list at beginning
+
+        //get prev high score list at beginning and convert to int[]
         highScoreString = File.ReadAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt");
+        string[] integerStrings = highScoreString.Split('\n');
+        for (int i = 0; i < highScoreList.Length; i++)
+        {
+            highScoreList[i] = int.Parse(integerStrings[i]);
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +42,7 @@ public class HighScore : MonoBehaviour
         
     }
 
-    //write the high scores to a file
+    //write the new high scores to a file
     private void WriteToFile()
     {
         highScoreString = "";

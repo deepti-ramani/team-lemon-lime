@@ -8,14 +8,13 @@ public class RandomContainer : MonoBehaviour
 {
     public AudioClip[] clips;
     public AudioMixerGroup output;
-    public KeyCode keyToPress = KeyCode.Space;
     public float minPitch = 0.75f;
     public float maxPitch = 1.25f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(keyToPress))
+        if (Input.GetAxis("Jump") > 0)
         {
             PlaySound();
         }
