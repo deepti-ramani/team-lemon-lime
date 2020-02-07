@@ -39,7 +39,12 @@ public class HighScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //for debugging
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            string resetText = "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n";
+            File.WriteAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt", "" + resetText);
+        }
     }
 
     //write the new high scores to a file
@@ -50,7 +55,7 @@ public class HighScore : MonoBehaviour
         {
             highScoreString += highScoreList[i] + "\n";
         }
-        File.WriteAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt", "" + highScoreString + "\n");
+        File.WriteAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt", "" + highScoreString);
     }
 
     public void DisplayHighScores()
