@@ -11,12 +11,19 @@ public class RandomContainer : MonoBehaviour
     public float minPitch = 0.75f;
     public float maxPitch = 1.25f;
 
+    public bool isPlaying = false;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Jump") > 0)
+        if (!isPlaying && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
+            isPlaying = true;
             PlaySound();
+        }
+        if(gameObject.GetComponent<AudioSource>() == null)
+        {
+            isPlaying = false;
         }
     }
 
@@ -42,6 +49,5 @@ public class RandomContainer : MonoBehaviour
 
         //derstroy audiosource when done, after full length of clip
         Destroy(source, clips[randomClip].length);
-
     }
 }

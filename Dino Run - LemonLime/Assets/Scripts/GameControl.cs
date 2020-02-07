@@ -62,10 +62,10 @@ public class GameControl : MonoBehaviour
     void Start()
     {
         //if restart button clicked, run game over function
-        RestartButton.GetComponent<Button>().onClick.AddListener(GameOver);
+        RestartButton.GetComponent<Button>().onClick.AddListener(Restart);
 
         //if high score list button clicked, show high scores
-        //HighScoreButton.GetComponent<Button>().onClick.AddListener()
+        //HighScoreButton.GetComponent<Button>().onClick.AddListener(DisplayHighScores)
     }
 
     // Update is called once per frame
