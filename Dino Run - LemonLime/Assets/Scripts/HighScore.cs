@@ -39,6 +39,7 @@ public class HighScore : MonoBehaviour
     //write the high scores to a file
     private void WriteToFile()
     {
+        highScoreString = "";
         for(int i = 0; i < highScoreList.Length; i++)
         {
             highScoreString += highScoreList[i] + "\n";
