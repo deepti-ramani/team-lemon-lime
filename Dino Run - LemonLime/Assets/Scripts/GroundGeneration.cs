@@ -11,22 +11,23 @@ using UnityEngine;
 
 public class GroundGeneration : MonoBehaviour
 {
-    public GameObject[] Ground = new GameObject[3];
-    public float SegmentWidth = 10.0f;
-    public Vector2 initPosToGenerate = new Vector2(26.0f, -2.0f);
+    public GameObject[] Ground = new GameObject[24];
+    public float SegmentWidth = 1.5f;
+    public Vector2 initPosToGenerate = new Vector2(-8.5f, -2.0f);
     public Vector2 currPosToGenerate = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()
     {
         currPosToGenerate = initPosToGenerate;
+        InstantiateInitGround();
     }
 
     // Update is called once per frame
     void Update()
     {
         //generate if camera approaches edge of ground
-        if(Vector2.Distance((Vector2)transform.position, currPosToGenerate) <= 15.0f)
+        if(Vector2.Distance((Vector2)transform.position, currPosToGenerate) <= 2.0f)
         {
             Instantiate(Ground[Random.Range(0, 3)], currPosToGenerate, transform.rotation);
             currPosToGenerate.x += SegmentWidth;
@@ -35,9 +36,10 @@ public class GroundGeneration : MonoBehaviour
 
     public void InstantiateInitGround()
     {
-        Instantiate(Ground[Random.Range(0, 3)], new Vector2(-4.0f, -2.0f), transform.rotation);
-        Instantiate(Ground[Random.Range(0, 3)], new Vector2(6.0f, -2.0f), transform.rotation);
-        Instantiate(Ground[Random.Range(0, 3)], new Vector2(16.0f, -2.0f), transform.rotation);
-        currPosToGenerate = initPosToGenerate;
+        for (int i = 0; i < 15; i++)
+        {
+            Instantiate(Ground[Random.Range(0, Ground.Length)], currPosToGenerate, transform.rotation);
+            currPosToGenerate.x += SegmentWidth;
+        }
     }
 }
