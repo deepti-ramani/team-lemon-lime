@@ -339,6 +339,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ground:
   - {fileID: 835408967020720073, guid: 8d4672366f6581249888bfe0b0506d00, type: 3}
+  - {fileID: 835408967020720073, guid: 8adc2ef15894da7418291d38b9f8fe95, type: 3}
+  - {fileID: 835408967020720073, guid: 942d236140c612e40b766b1a5ca06271, type: 3}
+  - {fileID: 835408967020720073, guid: b0a346d49af084d42b3a6a5b72c46d37, type: 3}
+  - {fileID: 835408967020720073, guid: 9ef4ec9f4c26529468757ba8b57d23ba, type: 3}
+  - {fileID: 835408967020720073, guid: bc5dbd1bd13854847b6f31ee13b050a2, type: 3}
+  - {fileID: 835408967020720073, guid: e59db75b3c3d1a745879420bbf58fda9, type: 3}
+  - {fileID: 835408967020720073, guid: 4ff39ff5c86d2f446a19443819a79b2f, type: 3}
+  - {fileID: 835408967020720073, guid: fb1cc1ad8e931774bb57cc6aef55d14b, type: 3}
+  - {fileID: 835408967020720073, guid: 99c56b42a8fc44240a542f4801dd0842, type: 3}
+  - {fileID: 835408967020720073, guid: ba9495408dad9a94c9fcfa5e2040ca39, type: 3}
+  - {fileID: 835408967020720073, guid: cf11ceab9cbefec43b383b80730f723d, type: 3}
+  - {fileID: 835408967020720073, guid: 137e9aefe9ced354b8a2cdd760c151ce, type: 3}
+  - {fileID: 835408967020720073, guid: 54acaa94f1370c94e86750538e56bcbe, type: 3}
+  - {fileID: 835408967020720073, guid: 1f2ba9940d75b454a9c99cd32bbaacb7, type: 3}
+  - {fileID: 835408967020720073, guid: 24ae7f4d2b6e1a4419164d4586e63e77, type: 3}
+  - {fileID: 835408967020720073, guid: 91820750712b61e44b8b788a8bee5c3b, type: 3}
+  - {fileID: 835408967020720073, guid: b85dae0a2a0512945ac21182ffbe480e, type: 3}
+  - {fileID: 835408967020720073, guid: 19411304f58ccd24594918fba4e74a66, type: 3}
+  - {fileID: 835408967020720073, guid: cf76462bc5a073a47b514da245678696, type: 3}
+  - {fileID: 835408967020720073, guid: 8cd088dfec11f86469e6a38c4fc21fcd, type: 3}
+  - {fileID: 835408967020720073, guid: 45b26f9055bc8cc4c8d544b7c772eb3b, type: 3}
+  - {fileID: 835408967020720073, guid: c95f7fc27bb714d46a26e7ecde6b0a49, type: 3}
+  - {fileID: 835408967020720073, guid: e956bd073258ef140bd14a47d65c593a, type: 3}
   SegmentWidth: 1.5
   initPosToGenerate: {x: -8.5, y: -2}
   currPosToGenerate: {x: 0, y: 0}
@@ -656,7 +679,7 @@ MonoBehaviour:
   GameOverText: {fileID: 0}
   RestartButton: {fileID: 644230055}
   HighScoreButton: {fileID: 563460192}
-  Camera: {fileID: 0}
+  Camera: {fileID: 519420028}
   initCameraPos: {x: 0, y: 0, z: -10}
   Player: {fileID: 0}
 --- !u!114 &570682228
