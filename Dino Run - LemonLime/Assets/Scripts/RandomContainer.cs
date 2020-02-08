@@ -1,53 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//grants access to Audio Mixer
+//grants access to the mixer
 using UnityEngine.Audio;
 
 public class RandomContainer : MonoBehaviour
 {
     public AudioClip[] clips;
     public AudioMixerGroup output;
+    //public KeyCode keyToPress = KeyCode.Space; //use to test
     public float minPitch = 0.75f;
     public float maxPitch = 1.25f;
 
-    public bool isPlaying = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPlaying && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)))
+        //default playback method for testing
+        /*if (Input.GetKeyDown(keyToPress))
         {
-            isPlaying = true;
             PlaySound();
-        }
-        if(gameObject.GetComponent<AudioSource>() == null)
-        {
-            isPlaying = false;
-        }
+        }*/
     }
 
-    public void PlaySound()
+    public void PlaySound(bool noPitchVar)
     {
-        //randomize within array length 
+        //randomize within the array length
         int randomClip = Random.Range(0, clips.Length);
 
         //create audiosource
-        AudioSource source = gameObject.AddComponent<AudioSource>();
+        AudioSource source = gameObject.GetComponent<AudioSource>();
 
-        //load clip to audiosource
+        //load clip into audiosource
         source.clip = clips[randomClip];
 
-        //set output for the audiosource
+        //set output for audiosource
         source.outputAudioMixerGroup = output;
+
+        if (noPitchVar)
+        {
+            //for sounds with no pitch variation
+            source.pitch = 1;
+        }
+        else
+        {
+            //otherwise set pitch variation
+            source.pitch = Random.Range(minPitch, maxPitch);
+        }
         
-        //set pitch variation
-        source.pitch = Random.Range(minPitch, maxPitch);
 
-        //play clip 
+        //play clip
         source.Play();
-
-        //derstroy audiosource when done, after full length of clip
-        Destroy(source, clips[randomClip].length);
     }
 }

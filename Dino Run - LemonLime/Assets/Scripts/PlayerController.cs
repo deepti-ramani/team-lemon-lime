@@ -1,4 +1,4 @@
-﻿/*
+﻿/* 
 PlayerController.cs
 by Kaijie Zhou and Deepti Ramani
 01/30/2020
@@ -9,12 +9,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour
 {
     //game control for end game
     public GameObject GameControl;
     public RandomContainer randomC;
+    public AudioClip[] jumpClips; 
 
     //animator for switching animations
     public Animator myAnimator;
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         GameControl = GameObject.Find("GameControl");
         myAnimator = gameObject.GetComponentInChildren<Animator>();
-        randomC = GameObject.FindObjectOfType(typeof(RandomContainer)) as RandomContainer;
+        randomC = GetComponent<RandomContainer>(); 
 
         OriginalPosition = gameObject.transform.position;
 
@@ -111,6 +113,8 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, currJumpHeight * jumpSpeed, 0);
+            randomC.clips = jumpClips;
+            randomC.PlaySound(false);
         }
         //at peak, start falling
         if (!isGrounded && gameObject.transform.position.y - OriginalPosition.y >= currJumpHeight * jumpMultiplier)
@@ -207,7 +211,7 @@ public class PlayerController : MonoBehaviour
         //then jump
         else if (isJump)
         {
-            randomC.PlaySound();
+            
             myAnimator.SetInteger("State", 4);
         }
         //then duck
