@@ -357,9 +357,9 @@ MonoBehaviour:
   PowerupList:
   - {fileID: 4496082421311592, guid: 7b281333ce646f94ead8f9ae9cbd4a67, type: 3}
   ObjectToInstantiate: {fileID: 0}
-  firstPos: 40
-  minDist: 15
-  maxDist: 25
+  firstPos: 75
+  minDist: 25
+  maxDist: 30
   targetPos: 0
   currPosToGenerate: {x: 0, y: 0, z: 0}
 --- !u!1 &563323675
