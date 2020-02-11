@@ -29,7 +29,7 @@ public class GroundGeneration : MonoBehaviour
         //generate if camera approaches edge of ground
         if(Vector2.Distance((Vector2)transform.position, currPosToGenerate) <= 2.0f)
         {
-            Instantiate(Ground[Random.Range(0, 3)], currPosToGenerate, transform.rotation);
+            Instantiate(Ground[Random.Range(0, 23)], currPosToGenerate, transform.rotation);
             currPosToGenerate.x += SegmentWidth;
         }
     }
