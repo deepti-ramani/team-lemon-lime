@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+PowerupGeneration.cs
+by Deepti Ramani
+02/05/2020
+This class generates powerups after the player has travelled a certian distance
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
