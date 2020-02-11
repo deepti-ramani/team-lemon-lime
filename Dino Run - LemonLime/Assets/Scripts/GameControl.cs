@@ -64,7 +64,7 @@ public class GameControl : MonoBehaviour
         RestartButton.GetComponent<Button>().onClick.AddListener(Restart);
 
         //if high score list button clicked, show high scores
-        //HighScoreButton.GetComponent<Button>().onClick.AddListener(DisplayHighScores)
+        HighScoreButton.GetComponent<Button>().onClick.AddListener(CheckHighScores);
     }
 
     // Update is called once per frame
@@ -114,11 +114,7 @@ public class GameControl : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.H))
         {
-            gameObject.GetComponent<HighScore>().DisplayHighScores();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            score = 500;
+            CheckHighScores();
         }
     }
 

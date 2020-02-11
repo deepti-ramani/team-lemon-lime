@@ -2,7 +2,7 @@
 GroundGeneration.cs
 by Deepti Ramani
 01/31/2020
-This class generates three different types of ground as the camera scrolls
+This class generates 24 different types of ground as the camera scrolls
 */
 
 using System.Collections;

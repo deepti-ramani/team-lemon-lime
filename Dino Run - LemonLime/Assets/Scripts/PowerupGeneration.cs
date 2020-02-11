@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+PowerupGeneration.cs
+by Deepti Ramani
+02/05/2020
+This class generates powerups after the player has travelled a certian distance
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +14,9 @@ public class PowerupGeneration : MonoBehaviour
 {
     public GameObject[] PowerupList = new GameObject[Enum.GetNames(typeof(PowerupType)).Length];
     public GameObject ObjectToInstantiate;
-    public float firstPos = 40.0f;
-    public float minDist = 15.0f;
-    public float maxDist = 25.0f;
+    public float firstPos = 75.0f;
+    public float minDist = 25.0f;
+    public float maxDist = 30.0f;
     public float targetPos;
     public Vector3 currPosToGenerate = Vector3.zero;
 
