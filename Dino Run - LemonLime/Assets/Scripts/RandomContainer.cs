@@ -17,10 +17,10 @@ public class RandomContainer : MonoBehaviour
     void Update()
     {
         //default playback method for testing
-        /*if (Input.GetKeyDown(keyToPress))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            PlaySound();
-        }*/
+            PlaySound(true);
+        }
     }
 
     public void PlaySound(bool noPitchVar)
