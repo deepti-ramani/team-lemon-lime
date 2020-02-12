@@ -139,7 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5496f3c20993c45bc24aa5b70161c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: e3da8824dc766a345a9e51932e947696, type: 3}
+  - {fileID: 8300000, guid: b7418ae295348f04e8bd315828a14976, type: 3}
+  - {fileID: 8300000, guid: a84bba2b921951a488a27c8c7eefc0f4, type: 3}
+  - {fileID: 8300000, guid: 4aaab360e57346845b90622808316a9b, type: 3}
+  - {fileID: 8300000, guid: b3c89afb999820f47894bd10578c161c, type: 3}
   output: {fileID: 24300002, guid: ddb2671350099c84ca1ffdfe8a2b1844, type: 2}
   minPitch: 0.75
   maxPitch: 1.25
@@ -153,7 +158,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 08f3e90b4f32da449ae6b0bf80263c85, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
