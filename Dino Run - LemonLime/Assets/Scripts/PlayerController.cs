@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         {
             currJumpHeight = Input.GetAxis("Jump") * maxJumpHeight;
         }
-        //isDown = Input.GetAxis("Jump") < 0;
+        isDown = Input.GetAxis("Jump") < 0;
 
         //cooldown after jump
         if (currJumpCooldown > 0.0f)
@@ -130,26 +130,11 @@ public class PlayerController : MonoBehaviour
         //player can duck if they are on the ground and press down arrow
         if (isGrounded && isDown)
         {
-            //TODO: duck
             isDuck = true;
-            Debug.Log("Duck");
-
-            //Reset collider
-            gameObject.GetComponent<EdgeCollider2D>().Reset();
-            Debug.Log("Reset Collider");
-            //Make new mesh for collider
-            gameObject.GetComponent<EdgeCollider2D>().CreateMesh(true, false);
-            Debug.Log("Remade Collider");
         }
         else
         {
             isDuck = false;
-            //Reset collider
-            gameObject.GetComponent<EdgeCollider2D>().Reset();
-            Debug.Log("Reset Collider");
-            //Make new mesh for collider
-            gameObject.GetComponent<EdgeCollider2D>().CreateMesh(true, false);
-            Debug.Log("Remade Collider");
         }
 
         //powerup timer
@@ -203,32 +188,48 @@ public class PlayerController : MonoBehaviour
     //switch between animations
     public void SelectAnimation()
     {
-        //dead has highest priority
-        if (isDead)
+        //only change these if its not plus content
+        if (!GameControl.GetComponent<GameControl>().isPlusContent)
         {
-            myAnimator.SetInteger("State", 3);
-        }
-        //then jump
-        else if (isJump)
-        {
-            
-            myAnimator.SetInteger("State", 4);
-        }
-        //then duck
-        else if (isDuck)
-        {
-            //go down for duck and change collider
-            transform.position = new Vector3(transform.position.x, OriginalPosition.y - 0.3f, transform.position.y);
-            myAnimator.SetInteger("State", 2);
-        }
-        //then normal running has the lowest priority
-        else
-        {
-            if (isGrounded)
+            //dead has highest priority
+            if (isDead)
             {
-                transform.position = new Vector3(transform.position.x, OriginalPosition.y, transform.position.y);
+                myAnimator.SetInteger("State", 3);
             }
-            myAnimator.SetInteger("State", 1);
+            //then jump
+            else if (isJump)
+            {
+
+                myAnimator.SetInteger("State", 4);
+            }
+            //then duck
+            else if (isDuck)
+            {
+                //go down for duck
+                transform.position = new Vector3(transform.position.x, OriginalPosition.y - 0.3f, transform.position.y);
+                myAnimator.SetInteger("State", 2);
+            }
+            //then normal running has the lowest priority
+            else
+            {
+                if (isGrounded)
+                {
+                    transform.position = new Vector3(transform.position.x, OriginalPosition.y, transform.position.y);
+                }
+                myAnimator.SetInteger("State", 1);
+            }
+        }
+        //plus animation
+        else if(GameControl.GetComponent<GameControl>().isPlusContent)
+        {
+            if(isDead)
+            {
+                myAnimator.SetInteger("State", 6);
+            }
+            else
+            {
+                myAnimator.SetInteger("State", 5);
+            }
         }
     }
 
