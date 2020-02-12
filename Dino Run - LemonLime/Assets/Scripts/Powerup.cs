@@ -2,7 +2,7 @@
 Powerup.cs
 by Deepti Ramani
 02/05/2020
-
+This class contains a template for different powerup types (currently, there is just 1)
 */
 
 using System.Collections;

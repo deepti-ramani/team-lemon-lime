@@ -26,7 +26,7 @@ public class ObstacleGeneration : MonoBehaviour
 
     //birds
     public const int ScoreUntilBirds = 500;
-    public float[] BirdYPos = { -1.25f, 0.0f, 1.25f };
+    public float[] BirdYPos = { -1.5f, 0.0f, 1.0f };
     public GameObject Bird;
 
     // Start is called before the first frame update
@@ -45,8 +45,7 @@ public class ObstacleGeneration : MonoBehaviour
             //generate cacti
             if (GameControl.GetComponent<GameControl>().score < ScoreUntilBirds)
             {
-                //instantiate random cactus variation
-                //TODO: weight by distace travelled (position) so that we don't get big ones in the beginning
+                //instantiate random cactus variation based on how far the player has already travelled (weighted)
                 if (transform.position.x < 50.0f)
                 {
                     randObject = Random.Range(0, 2);

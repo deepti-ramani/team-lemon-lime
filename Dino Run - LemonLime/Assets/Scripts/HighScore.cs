@@ -2,7 +2,7 @@
 HighScore.cs
 by Deepti Ramani
 02/05/2020
-
+This class controls the permanent high score list (write to and read from)
 */
 
 using System.Collections;
@@ -39,12 +39,8 @@ public class HighScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //for debugging
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            string resetText = "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n";
-            File.WriteAllText(@"C:\Users\deepti.ramani\Documents\DinoRun\team-lemon-lime\Dino Run - LemonLime\Assets\Scripts\HighScoreList.txt", "" + resetText);
-        }
+
+
     }
 
     //write the new high scores to a file
