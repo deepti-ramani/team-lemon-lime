@@ -15,6 +15,7 @@ public class GameControl : MonoBehaviour
 {
     public bool inGame = false;
     public bool gameOver = false;
+    public bool isPlusContent = false;
 
     //score
     public int score = 0;
@@ -60,11 +61,8 @@ public class GameControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if restart button clicked, run game over function
-        RestartButton.GetComponent<Button>().onClick.AddListener(Restart);
 
-        //if high score list button clicked, show high scores
-        HighScoreButton.GetComponent<Button>().onClick.AddListener(CheckHighScores);
+
     }
 
     // Update is called once per frame
@@ -99,6 +97,7 @@ public class GameControl : MonoBehaviour
             if(score % 100 == 0 && score > 0)
             {
                 flicker = true;
+                gameObject.GetComponent<AudioSource>().Play();
                 StartCoroutine(FlickerText(ScoreText));
             }
         }
@@ -112,7 +111,7 @@ public class GameControl : MonoBehaviour
         {
             Restart();
         }
-        if(Input.GetKeyDown(KeyCode.H))
+        if(Input.GetKeyDown(KeyCode.H) && isPlusContent)
         {
             CheckHighScores();
         }
@@ -144,20 +143,31 @@ public class GameControl : MonoBehaviour
         Player.GetComponent<PlayerController>().jumpSpeed = 0.0f;
         GameOverText.SetActive(true);
         RestartButton.SetActive(true);
-        HighScoreButton.SetActive(true);
+
+        //only show if its plus content
+        if (isPlusContent)
+        {
+            HighScoreButton.SetActive(true);
+        }
 
         //check high score
         if (score > highScore)
         {
             highScore = score;
             HighScoreText.GetComponent<TextMesh>().text = string.Format(String.Format("{0:00000}", highScore));
-            gameObject.GetComponent<HighScore>().AddScore(highScore);
+
+            //only update if its plus content
+            if (isPlusContent)
+            {
+                gameObject.GetComponent<HighScore>().AddScore(highScore);
+            }
         }
     }
 
     //reset values for starting over
     public void Restart()
     {
+        Debug.Log("restart");
         inGame = true;
         gameOver = false;
 
@@ -180,9 +190,14 @@ public class GameControl : MonoBehaviour
     //final screen; can't restart from here
     public void CheckHighScores()
     {
-        gameObject.GetComponent<HighScore>().DisplayHighScores();
-        GameOverText.SetActive(false);
-        RestartButton.SetActive(false);
-        HighScoreButton.SetActive(false);
+        //only display if its plus content
+        if (isPlusContent)
+        {
+            Debug.Log("Check hs");
+            gameObject.GetComponent<HighScore>().DisplayHighScores();
+            GameOverText.SetActive(false);
+            RestartButton.SetActive(false);
+            HighScoreButton.SetActive(false);
+        }
     }
 }

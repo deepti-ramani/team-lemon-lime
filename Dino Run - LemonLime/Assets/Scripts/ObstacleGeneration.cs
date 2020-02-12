@@ -74,6 +74,12 @@ public class ObstacleGeneration : MonoBehaviour
 
                 //instantiate
                 Instantiate(Bird, PosToGenerate, transform.rotation);
+
+                //plus content animation
+                if(GameControl.GetComponent<GameControl>().isPlusContent == true)
+                {
+                    Bird.GetComponent<Animator>().SetInteger("State", 1);
+                }
             }
 
             //calculate new distance
