@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     //game control for end game
     public GameObject GameControl;
     public RandomContainer randomC;
-    public AudioClip[] jumpClips; 
+    public AudioClip[] jumpClips;
+    public AudioClip[] deathClips;
 
     //animator for switching animations
     public Animator myAnimator;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     //find ground for jump
     public float groundPosition;
     public string groundToFind = "Ground";
+
 
     //original positionto check if climax of jump
     public Vector3 OriginalPosition;
@@ -158,6 +160,8 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "Obstacle")
         {
             isDead = true;
+            randomC.clips = deathClips;
+            randomC.PlaySound(true);
             GameControl.GetComponent<GameControl>().GameOver();
             transform.position = new Vector3(transform.position.x, OriginalPosition.y, transform.position.z);
         }
